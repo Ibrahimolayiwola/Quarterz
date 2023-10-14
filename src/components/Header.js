@@ -11,20 +11,20 @@ const Header = () => {
   }
 
   return (
-    <div className='bg-[#205] w-full sticky top-0 z-10 shadow-lg h-[70px]'>
+    <div className='bg-[#205] w-full sticky top-0 z-10 shadow-2xl h-[70px]'>
       <header className='max-w-6xl mx-auto flex justify-between items-center'>
         <div >
             <img onClick={() => navigate('/')} className='h-[70px] w-[120px] cursor-pointer' src={logo} alt=''/>
         </div>
         <div>
-            <ul className='text-[#DAF] flex space-x-12 items-center'>
-                <li onClick={() => navigate('/')} className={`border-b-[2px] border-b-transparent font-medium hover:border-b-[#DAF] cursor-pointer py-5 ${pathMatchRoute('/') && "border-b-[#DAF] font-semibold"}`}>
+            <ul className='text-slate-200 flex space-x-12 items-center'>
+                <li onClick={() => navigate('/')} className={`border-b-[1px] border-b-transparent font-normal hover:border-b-white cursor-pointer py-5 ${pathMatchRoute('/') && "border-b-[#DAF] font-semibold"}`}>
                     Home
                 </li>
-                <li onClick={() => navigate('/offers')} className={`border-b-[2px] border-b-transparent font-medium hover:border-b-[#DAF] cursor-pointer py-5 ${pathMatchRoute('/offers') && "border-b-[#DAF] font-semibold"}`}>
+                <li onClick={() => navigate('/offers')} className={`border-b-[1px] border-b-transparent font-normal hover:border-b-white cursor-pointer py-5 ${pathMatchRoute('/offers') && "border-b-[#DAF] font-semibold"}`}>
                     Offers
                 </li>
-                <li onClick={() => navigate('/sign-in')} className={`border-b-[2px] border-b-transparent font-medium hover:border-b-[#DAF] cursor-pointer py-5 ${pathMatchRoute('/sign-in') && "border-b-[#DAF] font-semibold"}`}>
+                <li onClick={() => navigate('/sign-in')} className={`border-b-[1px] transition ease-out duration-300 border-b-transparent font-normal hover:border-b-white cursor-pointer py-5 ${pathMatchRoute('/sign-in') && "border-b-[#DAF] font-semibold"}`}>
                     Sign in
                 </li>
                
