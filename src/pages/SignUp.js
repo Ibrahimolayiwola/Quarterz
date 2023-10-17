@@ -3,15 +3,36 @@ import signInImage from '../assets/images/sign-in.jpg'
 import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import GAuth from '../components/GAuth'
+import {auth, dataBase} from '../config/firebase'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
+import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-toastify'
 
 const SignUp = () => {
-  const [formData, setFormData] = useState({
+  const [userData, setUserData] = useState({
     name: '',
     email: '',
     password: ''
   })
-  const {name, email, password} = formData
+  const {name, email, password} = userData
   const [showPassword, setShowPassword] = useState(false)
+  const navigate = useNavigate()
+
+  const onSubmit = async e => {
+    e.preventDefault()
+    try {
+      const userCredentials = await createUserWithEmailAndPassword(auth, email , password)
+      const user = userCredentials.user
+      const userDataCopy = {...userData}
+      delete userDataCopy.password
+      userDataCopy.timeStamp = serverTimestamp()
+      await setDoc(doc(dataBase, 'users', user.uid), userDataCopy)
+      navigate('/')
+    } catch (error) {
+      toast.error('Something went wrong with the registration')
+    }
+  }
 
   return (
     <section>
@@ -21,15 +42,15 @@ const SignUp = () => {
           <img className='w-full rounded-2xl h-[400px]' src={signInImage} alt='sign-in'/>
         </div>
         <div className='w-full md:w-[67%] lg:w-[40%] lg:ml-20'>
-          <form className=''>
+          <form onSubmit={onSubmit} className=''>
           <input
             className='w-full px-4 py-2 text-gray-700 text-lg border-gray-300 rounded-md'
             type='text'
             placeholder='Full name' 
             value={name} 
             onChange={
-              e => setFormData({
-                ...formData, name: e.target.value 
+              e => setUserData({
+                ...userData, name: e.target.value 
               })} />
             <input
             className='w-full px-4 py-2 text-gray-700 text-lg border-gray-300 rounded-md mt-4'
@@ -37,8 +58,8 @@ const SignUp = () => {
             placeholder='Email address' 
             value={email} 
             onChange={
-              e => setFormData({
-                ...formData, email: e.target.value 
+              e => setUserData({
+                ...userData, email: e.target.value 
               })} />
             <div className='relative mt-4'>
             <input
@@ -47,8 +68,8 @@ const SignUp = () => {
             placeholder='Password' 
             value={password} 
             onChange={
-              e => setFormData({
-                ...formData, password: e.target.value 
+              e => setUserData({
+                ...userData, password: e.target.value 
               })} />
               {
                 showPassword ? (
