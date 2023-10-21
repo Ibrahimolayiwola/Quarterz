@@ -16,6 +16,7 @@ const SignUp = () => {
     email: '',
     password: ''
   })
+  
   const {name, email, password} = formData
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
@@ -81,9 +82,15 @@ const SignUp = () => {
             onChange={handleChange} />
               {
                 showPassword ? (
-                 <AiFillEyeInvisible onClick={() => setShowPassword(false)} className='absolute top-3 right-3' />
+                 <AiFillEyeInvisible 
+                  onClick={
+                  () => setShowPassword(false)} 
+                  className='absolute top-3 right-3' />
                 ):(
-                  <AiFillEye onClick={() => setShowPassword(true)} className='absolute top-3 right-3' />
+                  <AiFillEye 
+                  onClick={
+                  () => setShowPassword(true)} 
+                  className='absolute top-3 right-3' />
                 )
               }
             </div>
@@ -93,7 +100,6 @@ const SignUp = () => {
                 <p>Have an account?</p>
                 <Link to={'/sign-in'} className='text-red-800 hover:text-red-600 transition ease-out duration-200'>Sign in</Link>
               </div>
-              {/* <div><Link  className='text-[#057548] hover:text-[#6ec159] transition ease-out duration-200' to={'/forgot-password'}>Forgot password</Link></div> */}
             </div>
             <button className='w-full bg-green-700 uppercase text-center p-2 shadow-md text-slate-200 font-medium rounded-md hover:bg-green-800 active:bg-green-800 transition duration-200'>sign up</button>
             <div className='flex items-center my-4 before:border-b before:flex-1 before:border-gray-400 after:flex-1 after:border-b after:border-gray-400'>
@@ -101,7 +107,6 @@ const SignUp = () => {
             </div>
             <GAuth />
           </form>
-         
         </div>
       </div>
     </section>

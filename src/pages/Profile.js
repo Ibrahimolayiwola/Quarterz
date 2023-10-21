@@ -49,17 +49,29 @@ const Profile = () => {
         <h2 className='text-slate-200 text-lg font-bold text-center mt-6'>My Profile</h2>
         <form className='w-full md:w-[40%]'>
             <div className='w-full mb-4'>
-              <input className={`w-full text-gray-800 rounded border-gray-300 transition ease-out duration-200 ${changeDetail && 'bg-green-700 text-slate-200'}`} value={name} name='name' onChange={handleChange} disabled={!changeDetail} />
+              <input 
+              className={`w-full text-gray-800 rounded border-gray-300 transition ease-out duration-200 ${changeDetail && 'bg-green-700 text-slate-200'}`} 
+              value={name} 
+              name='name' 
+              onChange={handleChange} 
+              disabled={!changeDetail} 
+              />
             </div>
             <div>
               <input className='w-full text-gray-800 rounded border-2 border-gray-300 transition ease-out duration-200' value={email} name='email'  disabled />
             </div>
             <div className=' text-sm flex justify-between mt-6'>
-              <p className='text-white'>Do you want to change your name ? <button onClick={(e) => {
+              <p 
+                className='text-white'>Do you want to change your name ? 
+                <button 
+                onClick={(e) => {
                 e.preventDefault()
                 changeDetail && applyChange()
-                setChangeDetail((prevState) => !prevState)
-              }} className='text-red-600 transition ease-out duration-200 cursor-pointer'>{changeDetail ? 'Apply change': 'Edit'}</button></p>
+                setChangeDetail((prevState) => !prevState)}} 
+                className='text-red-600 transition ease-out duration-200 cursor-pointer'>
+                {changeDetail ? 'Apply change': 'Edit'}
+                </button>
+              </p>
               <button onClick={signOut} className='text-green-800 hover:text-green-600 transition ease-in-out duration-200'>Sign out</button>
             </div>
         </form>
