@@ -2,10 +2,24 @@ import React, { useState } from 'react'
 import signInImage from '../assets/images/sign-in.jpg'
 import { Link } from 'react-router-dom'
 import GAuth from '../components/GAuth'
+import { sendPasswordResetEmail } from 'firebase/auth'
+import { toast } from 'react-toastify'
+import { auth } from '../config/firebase'
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState('')
   
+  const onSubmit = async e => {
+    e.preventDefault()
+    try {
+      await sendPasswordResetEmail(auth, email)
+      toast.success('Email was sent')
+    } catch (err) {
+      toast.error('Could not send reset password')
+    }
+
+  }
+
   return (
     <section>
       <h2 className='text-slate-200 text-2xl font-bold text-center mt-6'>Sign In</h2>
@@ -28,9 +42,9 @@ const ForgetPassword = () => {
                 <p>Don't have an account?</p>
                 <Link to={'/sign-up'} className='text-red-800 hover:text-red-600 transition ease-out duration-200'>Register</Link>
               </div>
-              <div><Link  className='text-[#057548] hover:text-[#6ec159] transition ease-out duration-200' to={'/forgot-password'}>Sign in instead</Link></div>
+              <div><Link  className='text-[#057548] hover:text-[#6ec159] transition ease-out duration-200' to={'/sign-in'}>Sign in instead</Link></div>
             </div>
-            <button className='w-full bg-green-700 uppercase text-center p-2 shadow-md text-slate-200 font-medium rounded-md hover:bg-green-800 active:bg-green-800 transition duration-200'>send reset password</button>
+            <button onClick={onSubmit} className='w-full bg-green-700 uppercase text-center p-2 shadow-md text-slate-200 font-medium rounded-md hover:bg-green-800 active:bg-green-800 transition duration-200'>send reset password</button>
             <div className='flex items-center my-4 before:border-b before:flex-1 before:border-gray-400 after:flex-1 after:border-b after:border-gray-400'>
               <p className='mx-4 text-center font-medium text-slate-300'>OR</p>
             </div>

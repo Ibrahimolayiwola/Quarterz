@@ -4,33 +4,46 @@ import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import GAuth from '../components/GAuth'
 import {auth, dataBase} from '../config/firebase'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import {toast} from 'react-toastify'
+import useValidate from '../hooks/useValidate'
 
 const SignUp = () => {
-  const [userData, setUserData] = useState({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: ''
   })
-  const {name, email, password} = userData
+  const {name, email, password} = formData
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
+  const [formErrors, validate] = useValidate(formData)
+
+  const handleChange = e => {
+    const {name, value} = e.target
+    setFormData({...formData, [name]: value})
+  }
 
   const onSubmit = async e => {
     e.preventDefault()
-    try {
-      const userCredentials = await createUserWithEmailAndPassword(auth, email , password)
-      const user = userCredentials.user
-      const userDataCopy = {...userData}
-      delete userDataCopy.password
-      userDataCopy.timeStamp = serverTimestamp()
-      await setDoc(doc(dataBase, 'users', user.uid), userDataCopy)
-      navigate('/')
-    } catch (error) {
-      toast.error('Something went wrong with the registration')
+    validate()
+    if (Object.keys(formErrors).length === 0) {
+      try {
+        const userCredentials = await createUserWithEmailAndPassword(auth, email , password)
+        updateProfile(auth.currentUser, {
+          displayName: name
+        })
+        const user = userCredentials.user
+        const formDataCopy = {...formData}
+        delete formDataCopy.password
+        formDataCopy.timeStamp = serverTimestamp()
+        await setDoc(doc(dataBase, 'users', user.uid), formDataCopy)
+        navigate('/')
+      } catch (error) {
+        toast.error('Something went wrong with the registration')
+      }
     }
   }
 
@@ -47,38 +60,34 @@ const SignUp = () => {
             className='w-full px-4 py-2 text-gray-700 text-lg border-gray-300 rounded-md'
             type='text'
             placeholder='Full name' 
-            value={name} 
-            onChange={
-              e => setUserData({
-                ...userData, name: e.target.value 
-              })} />
+            value={name}
+            name='name' 
+            onChange={handleChange} />
             <input
             className='w-full px-4 py-2 text-gray-700 text-lg border-gray-300 rounded-md mt-4'
             type='email'
             placeholder='Email address' 
-            value={email} 
-            onChange={
-              e => setUserData({
-                ...userData, email: e.target.value 
-              })} />
+            value={email}
+            name='email' 
+            onChange={handleChange} />
+            <p className='text-sm text-red-600'>{formErrors.email}</p>
             <div className='relative mt-4'>
             <input
             className='w-full text-lg text-gray-700 border-gray-300 px-4 py-2 rounded-md' 
             type={showPassword ? 'text' : 'password'}
             placeholder='Password' 
-            value={password} 
-            onChange={
-              e => setUserData({
-                ...userData, password: e.target.value 
-              })} />
+            value={password}
+            name='password' 
+            onChange={handleChange} />
               {
                 showPassword ? (
-                 <AiFillEyeInvisible onClick={e => setShowPassword(false)} className='absolute top-3 right-3' />
+                 <AiFillEyeInvisible onClick={() => setShowPassword(false)} className='absolute top-3 right-3' />
                 ):(
-                  <AiFillEye onClick={e => setShowPassword(true)} className='absolute top-3 right-3' />
+                  <AiFillEye onClick={() => setShowPassword(true)} className='absolute top-3 right-3' />
                 )
               }
             </div>
+            <p className='text-sm text-red-600'>{formErrors.password}</p>
             <div className='flex justify-between items-center my-6 text-sm'>
               <div className='text-slate-200 flex gap-2'>
                 <p>Have an account?</p>
