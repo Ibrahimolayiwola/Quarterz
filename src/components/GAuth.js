@@ -2,9 +2,10 @@ import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { GoogleAuthProvider } from 'firebase/auth'
 import { signInWithPopup } from 'firebase/auth'
-import {auth} from '../config/firebase'
+import {auth, dataBase} from '../config/firebase'
 import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
 
 const GAuth = () => {
   const googleProvider = new GoogleAuthProvider()
@@ -13,7 +14,14 @@ const GAuth = () => {
   const signInWithGoogle = async e => {
     e.preventDefault()
     try {
-      await signInWithPopup(auth, googleProvider)
+      const userCredentials = await signInWithPopup(auth, googleProvider)
+      const user = userCredentials.user
+      const userData = {
+        name: user.displayName,
+        email: user.email,
+        timeStamp: serverTimestamp()
+      }
+      await setDoc(doc(dataBase, 'users', user.uid), userData)
       navigate('/')
     } catch (error) {
       toast.error('Sign in failed')
