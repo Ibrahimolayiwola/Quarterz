@@ -21,7 +21,7 @@ const Header = () => {
       if (user) {
         setPageState('Profile')
       } else {
-        setPageState('/sign in')
+        setPageState('Sign in')
       }
     } )
   },[auth])
