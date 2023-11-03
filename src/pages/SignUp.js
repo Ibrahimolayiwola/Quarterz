@@ -30,7 +30,7 @@ const SignUp = () => {
   const onSubmit = async e => {
     e.preventDefault()
     validate()
-    if (Object.keys(formErrors).length === 0) {
+    
       try {
         const userCredentials = await createUserWithEmailAndPassword(auth, email , password)
         updateProfile(auth.currentUser, {
@@ -45,7 +45,7 @@ const SignUp = () => {
       } catch (error) {
         toast.error('Something went wrong with the registration')
       }
-    }
+    
   }
 
   return (

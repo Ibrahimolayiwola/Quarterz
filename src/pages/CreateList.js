@@ -1,10 +1,18 @@
 import React, { useState } from 'react'
+import Spinner from '../components/Spinner'
+import { toast } from 'react-toastify'
+import useUploadFile from '../hooks/useUploadFile'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { dataBase } from '../config/firebase'
+import { useNavigate } from 'react-router'
 
 const CreateList = () => {
   const [formData, setFormData] = useState({
     type: 'sale',
     name: '',
     address: '',
+    longitude: 0,
+    latitude: 0,
     description: '',
     beds: 1,
     baths: 1,
@@ -13,11 +21,14 @@ const CreateList = () => {
     offer: true,
     regularPrice: 50,
     discountedPrice: 30,
+    images: []
   })
   const {
     type, 
     name, 
-    address, 
+    address,
+    longitude,
+    latitude, 
     beds, 
     baths, 
     parking, 
@@ -25,26 +36,105 @@ const CreateList = () => {
     description, 
     offer, 
     regularPrice, 
-    discountedPrice
+    discountedPrice,
+    images
   } = formData
 
+  const {upLoadFile} = useUploadFile(images)
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+  let file_url
+  
   const onChange = e => {
+    let boolean = null
+    const {id, value, files} = e.target
+    if(value === 'true') boolean = true
+    if(value === 'false') boolean = false
 
+    setFormData({
+      ...formData,
+      [id]: boolean ?? value
+    })
+
+    if(files){
+      setFormData({
+        ...formData,
+        images: files
+      })
+    }
+  }
+
+  const onSubmit = async e => {
+    
+    e.preventDefault()
+    setLoading(true)
+    if(+discountedPrice >= +regularPrice){
+      setLoading(false)
+      toast.error('Discounted price need to be less than regular price')
+      return
+    }
+    if(images.length > 6){
+      setLoading(false)
+      toast.error('Only maximum of 6 images are allowed')
+      return
+    }
+
+    try {
+      file_url = await upLoadFile()
+      const docRef = upLoadFormData()
+      setLoading(false)
+      toast.success('Listing created')
+      navigate(`/category/${formData.type}/${docRef.id}`)
+    } catch (error) {
+      setLoading(false)
+      toast.error('An error occurred while uploading images');
+    } 
+  }
+
+  const upLoadFormData = async() => {
+    const formDataCopy = {
+      ...formData,
+      imageUrl: file_url,
+      timeStamp: serverTimestamp()
+    }
+    delete formDataCopy.images
+    !offer && delete formDataCopy.discountedPrice
+    const doc_ref = await addDoc (collection(dataBase, 'listings'), formDataCopy)
+    return doc_ref
+  }
+
+  if(loading){
+    return <Spinner />
   }
 
   return (
+
     <div className='max-w-md mx-auto mt-6 '>
       <h1 className='text-lg font-bold text-slate-200 text-center'>Create a Listing</h1>
-      <from>
+      <form onSubmit={onSubmit}>
         <div className='mt-6'>
           <label className='text-slate-200 text-sm  font-semibold '>Sell/Rent</label>
           <div className='flex gap-6 mt-2'>
-            <button id='type' value="sale" className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm ${type === 'sale' ? 'bg-green-700 text-white': 'bg-slate-200 text-slate-800'}`}>sell</button>
-            <button id='type' value="rent" className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm hover:shadow-xl focus:shadow-xl transition ease-in-out duration-200 ${type === 'rent' ? 'bg-green-800 text-slate-200': 'bg-slate-200 text-slate-800' }`}>rent</button>
+            <button 
+              id='type' 
+              value="sale" 
+              type='button'
+              onClick={onChange}
+              className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm ${type === 'sale' ? 'bg-green-700 text-white': 'bg-slate-200 text-slate-800'}`}>
+                sell
+            </button>
+            <button 
+              id='type' 
+              value="rent"
+              type='button'
+              onClick={onChange} 
+              className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm hover:shadow-xl focus:shadow-xl transition ease-in-out duration-200 ${type === 'rent' ? 'bg-green-800 text-slate-200': 'bg-slate-200 text-slate-800' }`}>
+                rent
+            </button>
           </div>
         </div>
         <div className='my-6'>
-          <label for='name' className='block mb-3 text-slate-200 text-sm font-semibold'>Name</label>
+          <label className='block mb-3 text-slate-200 text-sm font-semibold'>Name</label>
           <input
             type='text'
             id='name'
@@ -59,7 +149,7 @@ const CreateList = () => {
         
         <div className='flex gap-6'>
           <div>
-            <label for="beds" className='block mb-2 text-slate-200 text-sm font-medium'>Beds</label>
+            <label  className='block mb-2 text-slate-200 text-sm font-medium '>Beds</label>
             <input 
             type='number'
             id='beds'
@@ -68,10 +158,10 @@ const CreateList = () => {
             required
             value={beds}
             onChange={onChange}
-            className='bg-white rounded w-20 p-2 text-center text-gray-700 border border-gray-300 transition ease-in-out duration-200 focus:bg-slate-200 focus:border-gray-700' />
+            className='bg-slate-200 rounded w-20 p-2 text-center text-gray-700 border border-gray-300 transition ease-in-out duration-200 focus:bg-slate-200 focus:border-gray-700' />
           </div>
           <div>
-            <label for="baths" className='block mb-2 text-slate-200 text-sm font-medium'>Baths</label>
+            <label  className='block mb-2 text-slate-200 text-sm font-medium'>Baths</label>
             <input 
             type='number'
             id='baths'
@@ -80,25 +170,53 @@ const CreateList = () => {
             required
             value={baths}
             onChange={onChange}
-            className='bg-white rounded w-20 p-2 text-center text-gray-700' />
+            className='bg-slate-200 rounded w-20 p-2 text-center text-gray-700' />
           </div>
         </div>
         <div className='mt-6'>
           <label className='text-slate-200 text-sm  font-semibold '>Parking spot</label>
           <div className='flex gap-6 mt-2'>
-            <button id='parking' value="true" className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm ${parking ? 'bg-green-700 text-white' : 'bg-slate-200 text-slate-800'}`}>Yes</button>
-            <button id='parking' value="false" className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm hover:shadow-xl focus:shadow-xl transition ease-in-out duration-200 ${!parking ? 'bg-green-800 text-slate-200': 'bg-slate-200 text-slate-800' }`}>No</button>
+            <button 
+              type='button'
+              id='parking' 
+              value={true}
+              onClick={onChange} 
+              className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm ${parking ? 'bg-green-700 text-white' : 'bg-slate-200 text-slate-800'}`}>
+                Yes
+            </button>
+            <button 
+              id='parking'
+              value={false}
+              type='button'
+              onClick={onChange}
+              className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm hover:shadow-xl focus:shadow-xl transition ease-in-out duration-200 ${!parking ? 'bg-green-800 text-slate-200': 'bg-slate-200 text-slate-800' }`}>
+                No
+            </button>
           </div>
         </div>
         <div className='mt-6'>
           <label className='text-slate-200 text-sm  font-semibold '>Furnished</label>
           <div className='flex gap-6 mt-2'>
-            <button id='furnished' value="true" className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm ${furnished ?  'bg-green-700 text-white': 'bg-slate-200 text-slate-800' }`}>Yes</button>
-            <button id='furnished' value="false" className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm hover:shadow-xl focus:shadow-xl transition ease-in-out duration-200 ${!furnished ? 'bg-green-800 text-slate-200': 'bg-slate-200 text-slate-800' }`}>No</button>
+            <button 
+              id='furnished'
+              type='button'
+              onClick={onChange}
+              value={true}
+              className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm ${furnished ?  'bg-green-700 text-white': 'bg-slate-200 text-slate-800' }`}>
+                Yes
+            </button>
+            <button 
+              id='furnished'
+              value={false}
+              type='button'
+              onClick={onChange} 
+              className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm hover:shadow-xl focus:shadow-xl transition ease-in-out duration-200 ${!furnished ? 'bg-green-800 text-slate-200': 'bg-slate-200 text-slate-800' }`}>
+              No
+            </button>
           </div>
         </div>
         <div className='my-6'>
-          <label for='address' className='block mb-3 text-slate-200 text-sm font-semibold'>Address</label>
+          <label className='block mb-3 text-slate-200 text-sm font-semibold'>Address</label>
           <textarea
             type='text'
             id='address'
@@ -107,8 +225,34 @@ const CreateList = () => {
             onChange={onChange}
             className='w-full bg-slate-200 text-gray-700 border border-gray-300 rounded shadow-lg hover:border-gray-200 focus:border-gray-600 focus:bg-slate-200 focus-text-gray-700' />
         </div>
+        <div className='flex gap-6'>
+          <div>
+            <label className='mb-2 block text-slate-200 text-sm font-semibold'>Longitude</label>
+            <input 
+              type='number'
+              min="-90"
+              max="90"
+              onChange={onChange}
+              id='longitude'
+              value={longitude}
+              required
+              className='w-20 text-center bg-slate-200 text-gray-700 border rounded border-gray-300 focus:border-gray-700 focus:bg-slate-200' />
+          </div>
+          <div>
+            <label className='mb-2 block text-slate-200 text-sm font-semibold'>latitude</label>
+            <input 
+              type='number'
+              min="-90"
+              max="90"
+              onChange={onChange}
+              id='latitude'
+              value={latitude}
+              required
+              className='w-20 text-center bg-slate-200 text-gray-700 border rounded border-gray-300 focus:border-gray-700 focus:bg-slate-200' />
+          </div>
+        </div>
         <div className='my-6'>
-          <label for='address' className='block mb-3 text-slate-200 text-sm font-semibold'>Description</label>
+          <label className='block mb-3 text-slate-200 text-sm font-semibold'>Description</label>
           <textarea
             type='text'
             id='description'
@@ -120,8 +264,22 @@ const CreateList = () => {
         <div className='mt-6'>
           <label className='text-slate-200 text-sm  font-semibold '>Offer</label>
           <div className='flex gap-6 mt-2'>
-            <button id='offer' value="false" className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm ${offer ? 'bg-green-700 text-white': 'bg-slate-200 text-slate-800' }`}>Yes</button>
-            <button id='type' value="true" className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm hover:shadow-xl focus:shadow-xl transition ease-in-out duration-200 ${!offer ? 'bg-green-800 text-slate-200': 'bg-slate-200 text-slate-800' }`}>No</button>
+            <button 
+              id='offer' 
+              value={true}
+              type='button'
+              onClick={onChange} 
+              className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm ${offer ? 'bg-green-700 text-white': 'bg-slate-200 text-slate-800' }`}>
+                Yes
+            </button>
+            <button 
+              id='offer' 
+              value={false}
+              type='button'
+              onClick={onChange} 
+              className={`w-full py-2 px-2 rounded font-medium uppercase shadow-xl text-sm hover:shadow-xl focus:shadow-xl transition ease-in-out duration-200 ${!offer ? 'bg-green-700 text-slate-200': 'bg-slate-200 text-slate-800' }`}>
+                No
+            </button>
           </div>
         </div>
         <div className='mt-6'>
@@ -166,12 +324,16 @@ const CreateList = () => {
           type='file'
           multiple
           required
+          onChange={onChange}
           accept='.jpg,.jpeg,.png'
           className='mt-2 w-full bg-slate-200 rounded  p-2 text-gray-700 border border-gray-300 focus:border-gray-700 focus:bg-slate-200 transition ease-in-out duration-200' />
         </div>
-        <button className='text-sm bg-green-700 w-full text-slate-200 uppercase rounded mt-6 shadow-lg px-4 py-2.5 my-11 font-semibold border border-gray-600 hover:bg-green-800 hover:shadow-2xl focus:bg-green-800 focus:shadow-2xl active:bg-green-900 active:shadow:2xl transition ease-in-out duration-150'>Create Listing
+        <button 
+          type='submit'
+          required
+          className='text-sm bg-green-700 w-full text-slate-200 uppercase rounded mt-6 shadow-lg px-4 py-2.5 my-11 font-semibold border border-gray-600 hover:bg-green-800 hover:shadow-2xl focus:bg-green-800 focus:shadow-2xl active:bg-green-900 active:shadow:2xl transition ease-in-out duration-150'>Create Listing
         </button>
-      </from>
+      </form>
     </div>
   )
 }

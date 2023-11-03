@@ -19,16 +19,17 @@ const SignIn = () => {
   const [formErrors, validate] = useValidate(formData)
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
+  
 
   const handleChange = e => {
     const {name, value} = e.target
     setFormData({...formData, [name]: value})
-    console.log(auth.currentUser)
   }
 
   const onSignIn = async e => {
     e.preventDefault()
     validate()
+
     try {
       const userCredentials = await signInWithEmailAndPassword(auth, email, password)
       if (userCredentials) 
