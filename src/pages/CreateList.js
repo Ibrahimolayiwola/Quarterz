@@ -3,7 +3,7 @@ import Spinner from '../components/Spinner'
 import { toast } from 'react-toastify'
 import useUploadFile from '../hooks/useUploadFile'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
-import { dataBase } from '../config/firebase'
+import { auth, dataBase } from '../config/firebase'
 import { useNavigate } from 'react-router'
 
 const CreateList = () => {
@@ -95,7 +95,8 @@ const CreateList = () => {
     const formDataCopy = {
       ...formData,
       imageUrl: file_url,
-      timeStamp: serverTimestamp()
+      timeStamp: serverTimestamp(),
+      userRef: auth.currentUser.uid
     }
     delete formDataCopy.images
     !offer && delete formDataCopy.discountedPrice

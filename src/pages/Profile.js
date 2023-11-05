@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
-import { auth, dataBase } from '../config/firebase'
+import React, { useEffect, useState } from 'react'
+import { dataBase } from '../config/firebase'
 import { useNavigate } from 'react-router'
-import { updateProfile } from 'firebase/auth'
-import { doc, updateDoc } from 'firebase/firestore'
+import { getAuth, updateProfile } from 'firebase/auth'
+import { collection, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import {ImHome} from 'react-icons/im'
+import ListingItem from '../components/ListingItem'
 
 const Profile = () => {
+  const auth = getAuth()
 
   const fetchedData = {
     name: auth.currentUser.displayName,
@@ -17,7 +19,8 @@ const Profile = () => {
   const {name, email} = profileData
   const navigate = useNavigate()
   const [changeDetail, setChangeDetail] = useState(false)
-
+  const [listings, setListings] = useState([])
+  const [loading, setLoading] = useState(true)
   const handleChange = e => {
     const {name, value} = e.target
     setProfileData({...profileData, [name]: value})
@@ -45,11 +48,36 @@ const Profile = () => {
     }
 
   }
+  
+
+  useEffect(()=> {
+    
+  const fetchUserListing = async () => {
+    const listingRef = collection(dataBase, 'listings')
+    const q = query(
+    listingRef, 
+    where('userRef','==', auth.currentUser.uid),
+    orderBy('timeStamp', 'desc')
+    )
+    let listing = []
+    const querySnap = await getDocs(q)
+    querySnap.forEach(doc => {
+      listing.push({
+        id: doc.id,
+        data: doc.data()
+      })
+    })
+   setListings(listing)
+   setLoading(false) 
+ }
+  fetchUserListing()
+  }, [auth.currentUser.uid])
+
   return (
     <>
       <section className='max-w-4xl md:max-w-6xl  mx-auto flex flex-col items-center justify-center gap-6 '>
-        <h2 className='text-slate-200 text-lg font-bold text-center mt-6'>My Profile</h2>
-        <div className='w-full md:w-[40%]'>
+        <h2 className='text-[#DAF] text-lg font-bold text-center mt-6'>My Profile</h2>
+        <div className='w-full md:w-[40%] mt-4'>
           <form className='w-full'>
               <div className='w-full mb-4'>
                 <input 
@@ -86,8 +114,35 @@ const Profile = () => {
               </Link>
             </button>
           </div>
-        </div>
-        
+        </div>  
+      </section>
+      <section className='max-w-6xl mt-9'>
+        {
+        loading && (listings.length === 0) ? (
+        <p 
+        className='text-white'>
+          Loading...
+        </p>) : (
+        <div>
+          <h2 className=' text-slate-200 font-bold text-center'>My Listings</h2>
+          <ul>
+            {listings.map(listing => (
+              <li
+                key={listing.id}>
+                <ListingItem 
+                id={listing.id} 
+                listing={listing.data}
+                /> 
+              </li> 
+              ))}
+            </ul>
+          </div>
+        )}
+        {
+        !loading && (listings.length === 0) && (
+        <p className='text-slate-200'>
+        You don't have any listings yet. Create one</p>
+        )}
       </section>
     </>
   )
