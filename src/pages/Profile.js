@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { dataBase } from '../config/firebase'
 import { useNavigate } from 'react-router'
 import { getAuth, updateProfile } from 'firebase/auth'
-import { collection, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import {ImHome} from 'react-icons/im'
@@ -49,6 +49,20 @@ const Profile = () => {
 
   }
   
+  const onEdit = listingId => {
+
+  }
+
+  const onDelete = async listingId => {
+    if(window.confirm('Are you sure you want to delete?')){
+      await deleteDoc(doc(dataBase, 'listings', listingId))
+      const updatedListings = listings.filter(
+        listing => listing.id !== listingId
+        )
+      setListings(updatedListings)
+      toast.success('Successfully deleted listing')
+    }
+  }
 
   useEffect(()=> {
     
@@ -73,10 +87,11 @@ const Profile = () => {
   fetchUserListing()
   }, [auth.currentUser.uid])
 
+
   return (
     <>
       <section className='max-w-4xl md:max-w-6xl  mx-auto flex flex-col items-center justify-center gap-6 '>
-        <h2 className='text-[#DAF] text-lg font-bold text-center mt-6'>My Profile</h2>
+        <h2 className='text-slate-200 text-lg font-bold text-center mt-6'>My Profile</h2>
         <div className='w-full md:w-[40%] mt-4'>
           <form className='w-full'>
               <div className='w-full mb-4'>
@@ -116,22 +131,24 @@ const Profile = () => {
           </div>
         </div>  
       </section>
-      <section className='max-w-6xl mt-9'>
+      <section className='mt-9'>
         {
         loading && (listings.length === 0) ? (
         <p 
         className='text-white'>
           Loading...
         </p>) : (
-        <div>
-          <h2 className=' text-slate-200 font-bold text-center'>My Listings</h2>
-          <ul>
+        <div className='max-w-6xl mx-auto'>
+          <h2 className=' text-slate-200 font-bold  text-center'>My Listings</h2>
+          <ul className=' mt-9 max-sm:space-y-8 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6 max-lg:px-20  xl:gap-6 '>
             {listings.map(listing => (
               <li
                 key={listing.id}>
                 <ListingItem 
                 id={listing.id} 
                 listing={listing.data}
+                onDelete={onDelete}
+                onEdit={onEdit}
                 /> 
               </li> 
               ))}

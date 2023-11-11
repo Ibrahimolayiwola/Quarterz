@@ -1,117 +1,161 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Spinner from '../components/Spinner'
 import { toast } from 'react-toastify'
 import useUploadFile from '../hooks/useUploadFile'
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
-import { auth, dataBase } from '../config/firebase'
-import { useNavigate } from 'react-router'
+import {doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore'
+import { dataBase } from '../config/firebase'
+import { useNavigate, useParams } from 'react-router'
+import { ref, deleteObject } from 'firebase/storage'
+import { storage } from '../config/firebase'
+import { getAuth } from 'firebase/auth'
+const EditList = () => {
 
-const CreateList = () => {
-  const [formData, setFormData] = useState({
-    type: 'sale',
-    name: '',
-    address: '',
-    longitude: 0,
-    latitude: 0,
-    description: '',
-    beds: 1,
-    baths: 1,
-    parking: false,
-    furnished: false,
-    offer: true,
-    regularPrice: 50,
-    discountedPrice: 30,
-    images: []
-  })
-  const {
-    type, 
-    name, 
-    address,
-    longitude,
-    latitude, 
-    beds, 
-    baths, 
-    parking, 
-    furnished, 
-    description, 
-    offer, 
-    regularPrice, 
-    discountedPrice,
-    images
-  } = formData
+   const auth = getAuth()
 
-  const {upLoadFile} = useUploadFile(images)
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
-  let file_url
-  
-  const onChange = e => {
-    let boolean = null
-    const {id, value, files} = e.target
-    if(value === 'true') boolean = true
-    if(value === 'false') boolean = false
-
-    setFormData({
-      ...formData,
-      [id]: boolean ?? value
-    })
-
-    if(files){
-      setFormData({
-        ...formData,
-        images: files
+    const [formData, setFormData] = useState({
+        type: 'sale',
+        name: '',
+        address: '',
+        longitude: 0,
+        latitude: 0,
+        description: '',
+        beds: 1,
+        baths: 1,
+        parking: false,
+        furnished: false,
+        offer: true,
+        regularPrice: 50,
+        discountedPrice: 30,
+        images: []
       })
-    }
-  }
-
-  const onSubmit = async e => {
+      const {
+        type, 
+        name, 
+        address,
+        longitude,
+        latitude, 
+        beds, 
+        baths, 
+        parking, 
+        furnished, 
+        description, 
+        offer, 
+        regularPrice, 
+        discountedPrice,
+        images,
+        imageUrl
+      } = formData
     
-    e.preventDefault()
-    setLoading(true)
-    if(+discountedPrice >= +regularPrice){
-      setLoading(false)
-      toast.error('Discounted price need to be less than regular price')
-      return
-    }
-    if(images.length > 6){
-      setLoading(false)
-      toast.error('Only maximum of 6 images are allowed')
-      return
-    }
+      const {upLoadFile} = useUploadFile(images)
+      const [loading, setLoading] = useState(false)
+      const navigate = useNavigate()
+      let file_url
+      
+      const onChange = e => {
+        let boolean = null
+        const {id, value, files} = e.target
+        if(value === 'true') boolean = true
+        if(value === 'false') boolean = false
+    
+        setFormData({
+          ...formData,
+          [id]: boolean ?? value
+        })
+    
+        if(files){
+          setFormData({
+            ...formData,
+            images: files
+          })
+        }
+      }
 
-    try {
-      file_url = await upLoadFile()
-      const docRef = upLoadFormData()
-      setLoading(false)
-      toast.success('Listing created')
-      navigate(`/category/${formData.type}/${docRef.id}`)
-    } catch (error) {
-      setLoading(false)
-      toast.error('An error occurred while uploading images');
-    } 
-  }
+      const params = useParams()
+    
+      const onSubmit = async e => {
+        
+        e.preventDefault()
+        setLoading(true)
+        if(+discountedPrice >= +regularPrice){
+          setLoading(false)
+          toast.error('Discounted price need to be less than regular price')
+          return
+        }
+        if(images.length > 6){
+          setLoading(false)
+          toast.error('Only maximum of 6 images are allowed')
+          return
+        }
+      
+        if(formData.userRef !== auth.currentUser.uid ){
+          toast.error('Cannot edit Listing')
+          navigate('/')
+          return
+        }
+    
+        try {
+          deleteImage()
+          file_url = await upLoadFile()
+          const docRef = upLoadFormData()
+          setLoading(false)
+          toast.success('Listing updated')
+          navigate(`/category/${formData.type}/${docRef.id}`)
+        } catch (error) {
+          setLoading(false)
+          toast.error('An error occurred while uploading images');
+        } 
+      }
+    
+      const upLoadFormData = async() => {
+        const formDataCopy = {
+          ...formData,
+          imageUrl: file_url,
+          timeStamp: serverTimestamp(),
+        }
+        delete formDataCopy.images
+        !offer && delete formDataCopy.discountedPrice
+        const doc_ref = await updateDoc (doc(dataBase, 'listings', params.listingId), formDataCopy)
+        return doc_ref
+      }
 
-  const upLoadFormData = async() => {
-    const formDataCopy = {
-      ...formData,
-      imageUrl: file_url,
-      timeStamp: serverTimestamp(),
-      userRef: auth.currentUser.uid
-    }
-    delete formDataCopy.images
-    !offer && delete formDataCopy.discountedPrice
-    const doc_ref = await addDoc (collection(dataBase, 'listings'), formDataCopy)
-    return doc_ref
-  }
+      const deleteImage = async () => {
+        try {
+            const path = new URL(imageUrl).pathname;
+            const filteredPath = path.slice(35) 
+            const storageRef = ref(storage, filteredPath)
+            await deleteObject(storageRef)
+            console.log('Image deleted successfully');
+          } catch (error) {
+            console.error('Error deleting image:', error);
+          }
+      }
 
-  if(loading){
-    return <Spinner />
-  }
+      useEffect(() => {
+        setLoading(true)
+        const getFile = async () => {
+            const docRef = doc(dataBase, 'listings', params.listingId)
+            try{
+                const docSnap = await getDoc(docRef)
+                if (docSnap.exists()){
+                    setFormData({...docSnap.data()})  
+                    }
+                   
+                setLoading(false)
+            } catch (error) {
+                console.error(error)
+            }  
+        }
+        getFile()
+        
+     },[params.listingId, auth.currentUser.uid, navigate]) 
+    
+      if(loading){
+        return <Spinner />
+      }
 
   return (
-
     <div className='max-lg:max-w-md mx-auto max-w-6xl mt-6 '>
-      <h1 className='text-lg font-bold text-slate-200 text-center'>Create a Listing</h1>
+      <h1 className='text-lg font-bold text-slate-200 text-center'>Edit Listing</h1>
       <form onSubmit={onSubmit}>
         <div className='lg:flex lg:gap-10 w-full lg:p-4 '>
           <div className='flex-1'>
@@ -342,7 +386,7 @@ const CreateList = () => {
         <button 
           type='submit'
           required
-          className='text-sm bg-green-700 w-full text-slate-200 uppercase rounded mt-6 shadow-lg px-4 py-2.5 my-11 font-semibold border border-gray-600 hover:bg-green-800 hover:shadow-2xl focus:bg-green-800 focus:shadow-2xl active:bg-green-900 active:shadow:2xl transition ease-in-out duration-150'>Create Listing
+          className='text-sm bg-green-700 w-full text-slate-200 uppercase rounded mt-6 shadow-lg px-4 py-2.5 my-11 font-semibold border border-gray-600 hover:bg-green-800 hover:shadow-2xl focus:bg-green-800 focus:shadow-2xl active:bg-green-900 active:shadow:2xl transition ease-in-out duration-150'>Update Listing
         </button>      
         </div>
       </form>
@@ -350,5 +394,4 @@ const CreateList = () => {
   )
 }
 
-export default CreateList
-
+export default EditList

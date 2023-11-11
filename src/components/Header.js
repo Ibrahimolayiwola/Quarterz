@@ -36,23 +36,23 @@ const Header = () => {
               src={logo} alt=''/>
         </div>
         <div>
-            <ul className='text-slate-200 flex space-x-12 items-center'>
+            <ul className='text-[#DAF] flex space-x-12 items-center'>
                 <li 
                   onClick={
                   () => navigate('/')} 
-                  className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-white cursor-pointer py-5 ${pathMatchRoute('/') && "border-b-2 border-b-slate-200 font-semibold"}`}>
+                  className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-[#DAF] cursor-pointer py-5 ${pathMatchRoute('/') && "border-b-2 border-b-[#DAF] font-semibold"}`}>
                     Home
                 </li>
                 <li 
                   onClick={
                   () => navigate('/offers')} 
-                  className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-white cursor-pointer py-5 ${pathMatchRoute('/offers') && "border-b-2 border-b-slate-200 font-semibold"}`}>
+                  className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-[#DAF] cursor-pointer py-5 ${pathMatchRoute('/offers') && "border-b-2 border-b-[#DAF] font-semibold"}`}>
                     Offers
                 </li>
                 <li 
                   onClick={
                   () => navigate('/profile')} 
-                  className={`border-b-[1px] text-sm transition ease-out duration-300 border-b-transparent font-semibold hover:border-b-white cursor-pointer py-5 ${(pathMatchRoute('/sign-in') || pathMatchRoute('/profile')) && "border-b-slate-200 font-semibold"}`}>
+                  className={`border-b-[1px] text-sm transition ease-out duration-300 border-b-transparent font-semibold hover:border-b-[#DAF] cursor-pointer py-5 ${(pathMatchRoute('/sign-in') || pathMatchRoute('/profile')) && "border-b-[#DAF] font-semibold"}`}>
                     {pageState}
                 </li>
                
