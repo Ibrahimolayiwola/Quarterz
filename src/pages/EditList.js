@@ -47,7 +47,7 @@ const EditList = () => {
       } = formData
     
       const {upLoadFile} = useUploadFile(images)
-      const [loading, setLoading] = useState(false)
+      const [loading, setLoading] = useState(true)
       const navigate = useNavigate()
       let file_url
       
@@ -94,19 +94,19 @@ const EditList = () => {
         }
     
         try {
-          deleteImage()
+          await Promise.all([...imageUrl].map( imgUrl => deleteImage(imgUrl)))
           file_url = await upLoadFile()
-          const docRef = upLoadFormData()
+          await updateFormData()
           setLoading(false)
           toast.success('Listing updated')
-          navigate(`/category/${formData.type}/${docRef.id}`)
+          navigate(`/category/${formData.type}/${params.listingId}`)
         } catch (error) {
           setLoading(false)
           toast.error('An error occurred while uploading images');
         } 
       }
     
-      const upLoadFormData = async() => {
+      const updateFormData = async() => {
         const formDataCopy = {
           ...formData,
           imageUrl: file_url,
@@ -114,24 +114,29 @@ const EditList = () => {
         }
         delete formDataCopy.images
         !offer && delete formDataCopy.discountedPrice
-        const doc_ref = await updateDoc (doc(dataBase, 'listings', params.listingId), formDataCopy)
-        return doc_ref
+        try { 
+         await updateDoc (doc(dataBase, 'listings', params.listingId), formDataCopy)
+        } catch (error) {
+          console.error('an error occurred while updating doc  ',error)
+        }
+        
       }
 
-      const deleteImage = async () => {
+      const deleteImage = async (imgUrl) => {
+       
         try {
-            const path = new URL(imageUrl).pathname;
-            const filteredPath = path.slice(35) 
-            const storageRef = ref(storage, filteredPath)
-            await deleteObject(storageRef)
-            console.log('Image deleted successfully');
-          } catch (error) {
-            console.error('Error deleting image:', error);
-          }
+          const path = new URL(imgUrl).pathname;
+          const filteredPath = path.slice(35) 
+          const storageRef = ref(storage, filteredPath)
+          await deleteObject(storageRef)
+          console.log('image deleted successfully')
+        } catch (error) {
+          console.error('Error deleting image:', error);
+        }
+       
       }
 
       useEffect(() => {
-        setLoading(true)
         const getFile = async () => {
             const docRef = doc(dataBase, 'listings', params.listingId)
             try{

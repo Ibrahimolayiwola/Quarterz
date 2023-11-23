@@ -81,7 +81,7 @@ const CreateList = () => {
 
     try {
       file_url = await upLoadFile()
-      const docRef = upLoadFormData()
+      const docRef = await upLoadFormData()
       setLoading(false)
       toast.success('Listing created')
       navigate(`/category/${formData.type}/${docRef.id}`)
@@ -352,3 +352,4 @@ const CreateList = () => {
 
 export default CreateList
 
+// https://firebasestorage.googleapis.com/v0/b/ib-homes-db0f8.appspot.com/o/1B5IsmSnRZVoog3jwrDPBAUPsNz2-1.jpg-d568f399-8fa6-448f-8afa-43240f9b4cba?alt=media&token=84401af3-e7b9-451f-a2d6-013acf99184b

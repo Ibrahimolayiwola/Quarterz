@@ -25,7 +25,8 @@ import {toast} from 'react-toastify'
   
     const storeFile = async file => {
         return new Promise((resolve, reject) => {
-          const filename = `${auth.currentUser.uid}-${file.name}-${uuidv4()}`
+          const file_name = file.name.replace(/\s/g, '')
+          const filename = `${auth.currentUser.uid}-${file_name}-${uuidv4()}`
           const storageRef = ref(storage, filename)
           const uploadTask = uploadBytesResumable(storageRef, file)
           uploadTask.on('state_changed', 

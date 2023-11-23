@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { dataBase } from '../config/firebase'
+import { dataBase, storage } from '../config/firebase'
 import { useNavigate } from 'react-router'
 import { getAuth, updateProfile } from 'firebase/auth'
 import { collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore'
@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import {ImHome} from 'react-icons/im'
 import ListingItem from '../components/ListingItem'
+import { deleteObject, ref } from 'firebase/storage'
 
 const Profile = () => {
   const auth = getAuth()
@@ -50,11 +51,16 @@ const Profile = () => {
   }
   
   const onEdit = listingId => {
-
+    navigate(`/edit-list/${listingId}`)
   }
 
   const onDelete = async listingId => {
     if(window.confirm('Are you sure you want to delete?')){
+      const targetListing = listings.find(listing => listing.id === listingId)
+      const image_url = targetListing.data.imageUrl
+      console.log(targetListing)
+      console.log(image_url)
+      await Promise.all([...image_url].map(url => deleteImage(url)))
       await deleteDoc(doc(dataBase, 'listings', listingId))
       const updatedListings = listings.filter(
         listing => listing.id !== listingId
@@ -62,6 +68,20 @@ const Profile = () => {
       setListings(updatedListings)
       toast.success('Successfully deleted listing')
     }
+  }
+  
+  const deleteImage = async (imgUrl) => {
+       
+    try {
+      const path = new URL(imgUrl).pathname;
+      const filteredPath = path.slice(35) 
+      const storageRef = ref(storage, filteredPath)
+      await deleteObject(storageRef)
+      console.log('image deleted successfully')
+    } catch (error) {
+      console.error('Error deleting image:', error);
+    }
+   
   }
 
   useEffect(()=> {
