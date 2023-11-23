@@ -4,7 +4,7 @@ import { dataBase } from '../config/firebase'
 import { useParams } from 'react-router'
 import Spinner from '../components/Spinner'
 import {Swiper, SwiperSlide} from 'swiper/react'
-import {FaLocationDot} from 'react-icons/fa6'
+import {FaLocationDot} from 'react-icons/fa6' 
 // import SwiperCore from 'swiper's
 import  {EffectFade, Autoplay, Navigation, Pagination, A11y, Scrollbar, Keyboard} from 'swiper/modules'
 // import 'swiper/css/bundle'
@@ -13,18 +13,21 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import 'swiper/css/autoplay'
 import 'swiper/css/scrollbar'
-import Moment from 'react-moment'
+// import Moment from 'react-moment'
 import { FaBed } from "react-icons/fa";
 import { MdBathtub } from "react-icons/md"
 import { FaSquareParking } from "react-icons/fa6"
 import { BsFillSignNoParkingFill } from "react-icons/bs"
 import { MdChair } from "react-icons/md"
+import { getAuth } from 'firebase/auth'
+import Contact from '../components/Contact'
 
 const Listing = () => {
     const [listing, setListing] = useState(null)
     const [loading, setLoading] = useState(true)
     const params = useParams()
-
+    const auth = getAuth()
+    const [contactLandlord, setContactLandlord] = useState(false)
     // const swiper = new Swiper('.swiper', {
     //     // Install modules
     //     modules: [Navigation, Pagination, Scrollbar],
@@ -80,7 +83,7 @@ const Listing = () => {
             ))}
         </Swiper>
         <div className='mt-20 max-w-5xl mx-auto shadow-lg shadow-slate-500 bg-white lg:flex lg:gap-4 p-4 md:px-6 lg:p-2'>
-            <div className='h-[250px] flex-1'>
+            <div className=' flex-1'>
                 <p className='text-[#a73eed] font-bold px-4 pt-2 '>
                     {listing.name} for - {listing.offer ? 
                listing.discountedPrice
@@ -130,6 +133,16 @@ const Listing = () => {
                         
                     </ul>
                 </div>
+               {
+                listing.userRef !== auth.currentUser?.uid && !contactLandlord &&
+                ( <div className='px-6 py-4'>
+                <button onClick={() => setContactLandlord(true)} className='text-sm bg-green-700 font-medium uppercase  px-7 py-2 text-slate-200 rounded-md w-full  shadow-md hover:bg-green-800 hover:shadow-lg transition ease-in-out duration-200 '>Contact the landlord</button>
+            </div>)
+               }
+               {
+                contactLandlord && 
+                (<Contact userRef={listing.userRef} listing={listing} />)
+               }
             </div>
             <div className='h-[250px] bg-[#205] flex-1 z-10 overflow-x-hidden'></div>
            
