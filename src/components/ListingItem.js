@@ -21,7 +21,7 @@ const ListingItem = ({listing, id,  onEdit, onDelete}) => {
             <p className=''>{listing.address}</p>
           </div>
             <p className='text-sm px-2 py-1 font-semibold'>{listing.name}</p>
-            <p className='text-[#DAF] px-2 py-1'>
+            <p className='text-[#a73eed] px-2 py-1'>
               {listing.offer ? 
                listing.discountedPrice
               .toString()

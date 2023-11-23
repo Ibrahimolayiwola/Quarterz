@@ -21,6 +21,7 @@ import { BsFillSignNoParkingFill } from "react-icons/bs"
 import { MdChair } from "react-icons/md"
 import { getAuth } from 'firebase/auth'
 import Contact from '../components/Contact'
+import Leaflet from '../components/Leaflet'
 
 const Listing = () => {
     const [listing, setListing] = useState(null)
@@ -82,8 +83,8 @@ const Listing = () => {
                 </SwiperSlide>
             ))}
         </Swiper>
-        <div className='mt-20 max-w-5xl mx-auto shadow-lg shadow-slate-500 bg-white lg:flex lg:gap-4 p-4 md:px-6 lg:p-2'>
-            <div className=' flex-1'>
+        <div className='mt-20 mb-4 max-w-5xl mx-auto shadow-sm shadow-[#a73eed] bg-[#205] lg:flex lg:gap-4 p-4 md:px-6 backdrop: lg:p-2'>
+            <div className=' flex-1 text-slate-200'>
                 <p className='text-[#a73eed] font-bold px-4 pt-2 '>
                     {listing.name} for - {listing.offer ? 
                listing.discountedPrice
@@ -144,7 +145,9 @@ const Listing = () => {
                 (<Contact userRef={listing.userRef} listing={listing} />)
                }
             </div>
-            <div className='h-[250px] bg-[#205] flex-1 z-10 overflow-x-hidden'></div>
+            <div className='p-4 h-[250px]  flex-1 z-10 overflow-x-hidden'>
+                <Leaflet listing={listing} />
+            </div>
            
         </div>
        

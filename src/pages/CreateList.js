@@ -250,6 +250,7 @@ const CreateList = () => {
                 <label className='mb-2 block text-slate-200 text-sm font-semibold'>Longitude</label>
                 <input 
                   type='number'
+                  step='any'
                   min="-90"
                   max="90"
                   onChange={onChange}
@@ -262,6 +263,7 @@ const CreateList = () => {
                 <label className='mb-2 block text-slate-200 text-sm font-semibold'>latitude</label>
                 <input 
                   type='number'
+                  step='any'
                   min="-90"
                   max="90"
                   onChange={onChange}
