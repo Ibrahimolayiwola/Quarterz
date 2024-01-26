@@ -27,8 +27,8 @@ const Header = () => {
   },[auth])
 
   return (
-    <div className='bg-[#205] w-full sticky top-0 z-10 shadow-2xl h-[70px]'>
-      <header className='max-w-6xl mx-auto flex justify-between items-center'>
+    <div className='bg-[#fff] w-full sticky top-0 z-50 shadow-2xl h-[70px]  left-0'>
+      <header className='max-w-6xl mx-auto flex justify-between items-center z-50'>
         <div >
             <img onClick={
               () => navigate('/')} 
@@ -36,26 +36,31 @@ const Header = () => {
               src={logo} alt=''/>
         </div>
         <div>
-            <ul className='text-[#a73eed] flex space-x-12 items-center'>
+            <ul className='text-red-500 font-medium flex space-x-12 items-center'>
                 <li 
                   onClick={
                   () => navigate('/')} 
-                  className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-[#a73eed] cursor-pointer py-5 ${pathMatchRoute('/') && "border-b-2 border-b-[#a73eed] font-semibold"}`}>
+                  className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-orange-600 cursor-pointer py-5 ${pathMatchRoute('/') && "border-b-2 border-b-orange-600 font-semibold"}`}>
                     Home
                 </li>
                 <li 
                   onClick={
                   () => navigate('/offers')} 
-                  className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-[#a73eed] cursor-pointer py-5 ${pathMatchRoute('/offers') && "border-b-2 border-b-[#a73eed] font-semibold"}`}>
+                  className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-orange-600 cursor-pointer py-5 ${pathMatchRoute('/offers') && "border-b-2 border-b-orange-600 font-semibold"}`}>
                     Offers
                 </li>
                 <li 
                   onClick={
                   () => navigate('/profile')} 
-                  className={`border-b-[1px] text-sm transition ease-out duration-300 border-b-transparent font-semibold hover:border-b-[#a73eed] cursor-pointer py-5 ${(pathMatchRoute('/sign-in') || pathMatchRoute('/profile')) && "border-b-[#a73eed] font-semibold"}`}>
+                  className={`border-b-[1px] text-sm transition ease-out duration-300 border-b-transparent font-semibold hover:border-b-orange-600 cursor-pointer py-5 ${(pathMatchRoute('/sign-in') || pathMatchRoute('/profile')) && "border-b-orange-600 font-semibold"}`}>
                     {pageState}
                 </li>
-               
+                <li 
+                  onClick={
+                  () => navigate('/contact')} 
+                  className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-orange-600 cursor-pointer py-5 ${pathMatchRoute('/offers') && "border-b-2 border-b-orange-600 font-semibold"}`}>
+                    Contact
+                </li>
             </ul>
         </div>
       </header>

@@ -96,7 +96,9 @@ const CreateList = () => {
       ...formData,
       imageUrl: file_url,
       timeStamp: serverTimestamp(),
-      userRef: auth.currentUser.uid
+      userRef: auth.currentUser.uid,
+      photoUrl: auth.currentUser.photoURL,
+      agentName: auth.currentUser.displayName
     }
     delete formDataCopy.images
     !offer && delete formDataCopy.discountedPrice

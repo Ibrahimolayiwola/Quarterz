@@ -46,7 +46,7 @@ const SignIn = () => {
       <h2 className='text-slate-200 text-2xl font-bold text-center mt-6'>Sign In</h2>
       <div className='flex justify-center flex-wrap items-center px-6 py-12 max-w-5xl mx-auto overflow-hidden'>
         <div className='w-full md:w-[67%] lg:w-[50%] mb-12 md:mb-6'>
-          <img className='w-full rounded-2xl h-[400px]' src={signInImage} alt='sign-in'/>
+          <img className='w-full rounded-2xl h-[400px]' loading='lazy' src={signInImage} alt='sign-in'/>
         </div>
         <div className='w-full md:w-[67%] lg:w-[40%] lg:ml-20'>
           <form className=''>

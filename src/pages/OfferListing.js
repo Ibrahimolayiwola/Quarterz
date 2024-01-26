@@ -35,10 +35,10 @@ const OfferListing = () => {
     }, [])
   return (
     <>
-      <div className='my-6 overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-6 max-w-6xl mx-auto'>
+      <div className='my-6 max-sm:px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-6 max-w-6xl mx-auto'>
       {
         offerListing && offerListing.map(({id, data}) => (
-            <ListingObject listing={data} id={id}/>
+            <ListingObject key={id} listing={data} id={id}/>
         ) )
        }
       </div>

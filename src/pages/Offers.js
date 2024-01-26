@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Dropdown from '../components/Dropdown'
 
 const Offers = () => {
+ 
+
   return (
     <div>
-      Offers
+      <Dropdown />
     </div>
   )
 }

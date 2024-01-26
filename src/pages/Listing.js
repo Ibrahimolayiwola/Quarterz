@@ -4,15 +4,10 @@ import { dataBase } from '../config/firebase'
 import { useParams } from 'react-router'
 import Spinner from '../components/Spinner'
 import {Swiper, SwiperSlide} from 'swiper/react'
-import {FaLocationDot} from 'react-icons/fa6' 
-// import SwiperCore from 'swiper's
-import  {EffectFade, Autoplay, Navigation, Pagination, A11y, Scrollbar, Keyboard} from 'swiper/modules'
-// import 'swiper/css/bundle'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import 'swiper/css/autoplay'
-import 'swiper/css/scrollbar'
+import {Pagination} from 'swiper/modules'
+import {FaLocationDot} from 'react-icons/fa6' 
 // import Moment from 'react-moment'
 import { FaBed } from "react-icons/fa";
 import { MdBathtub } from "react-icons/md"
@@ -29,16 +24,7 @@ const Listing = () => {
     const params = useParams()
     const auth = getAuth()
     const [contactLandlord, setContactLandlord] = useState(false)
-    // const swiper = new Swiper('.swiper', {
-    //     // Install modules
-    //     modules: [Navigation, Pagination, Scrollbar],
-    //     speed: 500
-    //     navigation: {
-    //       nextEl: '.swiper-button-next',
-    //       prevEl: '.swiper-button-prev',
-    //     },
-    //     // ...
-    //   });
+   
 
 
     useEffect(() => {
@@ -62,12 +48,14 @@ const Listing = () => {
   return (
     <>
         <h1 className='text-slate-200 text-2xl font-semibold m-9'>Property Details</h1>
-        <Swiper
+        {/* <Swiper
          
        
-        navigation={true}
-        pagination={{
-            clickable: true,
+       navigation={
+        true
+       }
+        pagination= {{
+            clickable: true
         }}
         scrollbar={{ draggable: true}}
         effect='fade'
@@ -76,14 +64,34 @@ const Listing = () => {
         >
             {listing.imageUrl.map((url, index) => (
                 <SwiperSlide className='' key={index}>
-                   <img style={{
+                   <img className='w-full' style={{
                     height: '400px',
                     objectFit: 'cover'
                    }} src={url} alt=''/>
                 </SwiperSlide>
             ))}
+        </Swiper> */}
+        <Swiper
+            slidesPerView={'auto'}
+            spaceBetween={30}
+            centeredSlides={true}
+            pagination={{
+                clickable: true,
+            }}
+            modules= {[Pagination]}
+            className='swiper w-full '
+            >
+            
+            {listing.imageUrl.map((url, index) => (
+                <SwiperSlide className='swiper-slide w-44 overflow-hidden' key={index}>
+                   <img className='w-full' style={{
+                    // height: '400px',
+                    objectFit: 'cover'
+                   }} src={url} alt=''/>
+                </SwiperSlide>
+            ))}
         </Swiper>
-        <div className='mt-20 mb-4 max-w-5xl mx-auto shadow-sm shadow-[#a73eed] bg-[#205] lg:flex lg:gap-4 p-4 md:px-6 backdrop: lg:p-2'>
+        <div className='mt-20 max-w-5xl mx-auto shadow-sm shadow-[#a73eed] bg-[#205] lg:flex lg:gap-4 p-4 md:px-6 backdrop: lg:p-2'>
             <div className=' flex-1 text-slate-200'>
                 <p className='text-[#a73eed] font-bold px-4 pt-2 '>
                     {listing.name} for - {listing.offer ? 

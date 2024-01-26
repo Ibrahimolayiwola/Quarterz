@@ -6,8 +6,8 @@ import { collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where }
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import {ImHome} from 'react-icons/im'
-import ListingItem from '../components/ListingItem'
 import { deleteObject, ref } from 'firebase/storage'
+import ListingObject from '../components/ListingObject'
 
 const Profile = () => {
   const auth = getAuth()
@@ -158,13 +158,13 @@ const Profile = () => {
         className='text-white'>
           Loading...
         </p>) : (
-        <div className='max-w-6xl mx-auto'>
+        <div className='mx-6xl mx-auto'>
           <h2 className=' text-slate-200 font-bold  text-center'>My Listings</h2>
-          <ul className=' mt-9 max-sm:space-y-8 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6 max-lg:px-20  xl:gap-6 '>
+          <ul className=' mt-9 p-4 px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto items-center justify-center justify-items-center gap-6 '>
             {listings.map(listing => (
               <li
                 key={listing.id}>
-                <ListingItem 
+                <ListingObject 
                 id={listing.id} 
                 listing={listing.data}
                 onDelete={onDelete}
