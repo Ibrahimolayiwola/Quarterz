@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import {Pagination, Autoplay, Navigation} from 'swiper/modules'
+import {Pagination, Mousewheel, Autoplay, Navigation} from 'swiper/modules'
 import client1 from '../assets/images/testimonial/img1.jpg'
 import client2 from '../assets/images/testimonial/img2.jpg'
 import client3 from '../assets/images/testimonial/img3.jpg'
@@ -12,7 +12,7 @@ import SwiperNavButton from './SwiperNavButton'
 import { IoArrowBackOutline } from "react-icons/io5";
 import { IoArrowForwardOutline } from "react-icons/io5";
 
-const Slider = () => {
+const TestimonialSlider = () => {
 
   const swiperRef = useRef()
 
@@ -47,40 +47,60 @@ const Slider = () => {
     swiperRef.current.swiper.slidePrev()
   }
 
+
+
   return (
     <>
 
-    <div className=' absolute right-12 top-[35%] flex gap-6 items-center'>
+    <div className=' absolute right-12 top-[40%] flex gap-6 items-center max-lg:hidden'>
       <button className='text-xl text-slate-200 bg-orange-600 p-5 font-bold' onClick={handlePrev}>
         <IoArrowBackOutline />
       </button>
-      <button className='text-xl bg-white text-slate-900 p-5 font-bold hover:bg-orange-500 hover:text-slate-200' onClick={handleNext}>
+      <button className='text-xl bg-white text-slate-900 p-5 font-bold hover:bg-orange-600 hover:text-slate-200' onClick={handleNext}>
         <IoArrowForwardOutline />
       </button>
     </div>
       <Swiper
         ref={swiperRef}
-        slidesPerView={2}
-        spaceBetween={50}
-        pagination={false}
-       
-        modules={[Pagination, Autoplay, Navigation]}
-        className="mySwiper  mt-16 flex justify-center "
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            
+          },
+          760: {
+            slidesPerView: 2,
+            spaceBetween: 40,
+            
+          }
+        }
+         
+        }
+        slidesPerView={1}
+        spaceBetween={10}
+        mousewheel={true}
+        pagination={{
+          el: '.swiper-paginations',
+          type: 'bullets',
+          clickable: true,
+       }}
+        modules={[Pagination, Mousewheel, Autoplay, Navigation]}
+        className="my-swiper "
       >
         {
           clientData.map(client => (
-            <SwiperSlide className='swiper-slide rounded-md'>
+            <SwiperSlide className=' swiper-slide rounded-md bg-[#fff] shadow-md my-6'>
           <div className='p-8'>
-            <div className='flex justify-between items-center'>
+            <div className='flex justify-between items-center max-lg:flex-col-reverse gap-3'>
               <div className='flex items-center gap-4'>
                 <div>
                   <img src={client.photo} className='w-16 h-16 rounded-full object-cover' />
                 </div>
                 <div>
-                  <p className=' font-bold text-slate-900'>
+                  <p className=' font-bold text-slate-900 font-size-p'>
                     {client.name} 
                   </p>
-                  <p className='text-slate-500 uppercase'>
+                  <p className='text-slate-500 uppercase font-size-p'>
                     selling agent
                   </p>
                 </div>
@@ -95,19 +115,20 @@ const Slider = () => {
               </div>
             </div>
             <div className='mt-4'>
-              <p className='text-slate-500 '>
+              <p className='text-slate-500 font-size-p'>
                 {client.feedback}
               </p>
             </div>
           </div>
           
+         
         </SwiperSlide>
           ))
         }
-        
+         <p className='swiper-paginations text-center lg:hidden mt-8 z-20 flex items-center justify-center gap-1'></p>
       </Swiper>
     </>
   )
 }
 
-export default Slider
+export default TestimonialSlider

@@ -12,6 +12,9 @@ import { FaHandHolding } from "react-icons/fa6";
 import { IoHomeOutline } from "react-icons/io5";
 import { RiHome8Line } from "react-icons/ri";
 import { HiArrowLongRight } from "react-icons/hi2";
+import imgIcon1 from '../assets/icon-img/img-icon1.png'
+import imgIcon2 from '../assets/icon-img/img-icon2.png'
+import imgIcon3 from '../assets/icon-img/img-icon3.png'
 const AboutUs = () => {
   return (
     <>
@@ -150,7 +153,7 @@ const AboutUs = () => {
             </div>
           </div>
           <div className="flex-1">
-            <img src={aboutImg3} alt="" />
+            <img src={aboutImg3} alt="about" />
           </div>
         </div>
         <div>
@@ -162,20 +165,19 @@ const AboutUs = () => {
               Our Main Focus
             </h2>
             
-            <div className=" flex gap-6 p-6 flex-col sm:flex-row sm:flex-wrap justify-center items-center ">
-              <div className=" flex flex-col justify-center items-center gap-6 px-6 py-9  text-center text-slate-300  hover:text-red-500 hover:border-b-2 shadow-2xl  hover:border-b-red-500 transition-colors duration-500 ease-linear sm:flex-initial sm:w-[300px] sm:flex-shrink-0 sm:flex-grow">
-                <div className="flex flex-col justify-center  items-center text-red-400 text-center my-6">
-                  <RiHome8Line className="text-[45px] text-center" />
-                  <FaHandHolding className="text-[60px] -mt-14 z-20" />
+            <div className=" flex gap-6 p-6 flex-col sm:flex-row sm:flex-wrap justify-center items-center max-sm-md:px-16">
+              <div className="flex flex-col justify-center items-center gap-6 px-6 py-9  text-center text-slate-300  hover:text-red-500 hover:border-b-2 shadow-2xl  hover:border-b-red-500 transition-colors duration-500 ease-linear sm-md:w-[300px] xl:w-[340px] md:w-[340px] md-lg:w-[300px] xl-2xl:w-[380px]">
+                <div className=" text-red-400 ">
+                  <img src={imgIcon1} alt="Icon1" />
                 </div>
                 <h1 className="text-2xl text-slate-900 font-bold hover:text-red-500 transition-all duration-200 ease-in-out">
                   Buy a Home
                 </h1>
-                <p className="text-slate-600 text-center font-size-p ">
+                <p className="text-slate-600 text-center text-sm leading-6">
                   over 1 million+ homes for sale available on the website, we
                   can match you with a house you will want to call home.
                 </p>
-                <div className="flex items-center justify-center font-semibold mt-6 mb-3">
+                <div className="flex items-center justify-center font-semibold mt-2 mb-2">
                   <span>Find a home</span>
                   <span className="pt-1">
                     <HiArrowLongRight />
@@ -183,40 +185,38 @@ const AboutUs = () => {
                 </div>
                 
               </div>
-              <div className="flex flex-col justify-center items-center gap-6 px-6 py-9 text-center text-slate-300 shadow-2xl hover:border-b-2 hover:text-red-500 hover:border-b-red-500 transition-colors duration-500 ease-linear sm:flex-initial sm:w-[300px] sm:flex-shrink-0 sm:flex-grow">
-                <div className="flex flex-col justify-center items-center text-red-400 text-center my-6">
-                  <AiOutlineDollarCircle className="text-[25px] text-center z-20 -mb-3 font-medium" />
-                  <FaHome className="text-[45px] " />
+              <div className="flex flex-col justify-center items-center gap-6 px-6 py-9 text-center text-slate-300 shadow-2xl hover:border-b-2 hover:text-red-500 hover:border-b-red-500 transition-colors duration-500 ease-linear  sm-md:w-[300px] xl:w-[340px] md:w-[340px] md-lg:w-[300px] xl-2xl:w-[380px]">
+                <div className=" text-red-400 ">
+                  <img src={imgIcon2} alt="icon2" />
                 </div>
                 <h1 className="text-2xl text-slate-900 font-bold hover:text-red-500 transition-all duration-200 ease-in-out">
                   Rent a Home
                 </h1>
-                <p className="text-slate-600 text-center font-size-p">
+                <p className="text-slate-600 text-center text-sm leading-6">
                   over 1 million+ homes for sale available on the website, we
                   can match you with a house you will want to call home.
                 </p>
-                <div className="flex items-center justify-center font-semibold mt-6 mb-3">
+                <div className="flex items-center justify-center font-semibold mt-2 mb-2">
                   <span>Find a home</span>
                   <span className="pt-1">
                     <HiArrowLongRight />
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col justify-center items-center gap-6 px-6 py-9 shadow-2xl text-center text-slate-300 hover:border-b-2 hover:text-red-500 hover:border-b-red-500 transition duration-500 sm:flex-initial sm:w-[300px] sm:flex-shrink-0 sm:flex-grow-half lg:flex-grow">
-                <div className="flex flex-col justify-center  items-center text-red-400 text-center my-6">
-                  <IoHomeOutline className="text-[25px] text-center  font-bold" />
-                  <FaRegHandshake className="text-[45px] -mt-[6px]" />
+              <div className="flex flex-col justify-center items-center gap-6 px-6 py-9 shadow-2xl text-center text-slate-300 hover:border-b-2 hover:text-red-500 hover:border-b-red-500 transition duration-500 sm-md:w-[300px] xl:w-[340px] md:w-[340px] md-lg:w-[300px] xl-2xl:w-[380px]">
+                <div className=" text-red-400">
+                  <img src={imgIcon3} alt="icon3" />
                 </div>
                 <h1 className="text-2xl text-slate-900 font-bold hover:text-red-500">
                   Sell a Home
                 </h1>
-                <p className="text-slate-600 text-center font-size-p">
+                <p className="text-slate-600 text-center text-sm leading-6">
                   over 1 million+ homes for sale available on the website, we
                   can match you with a house you will want to call home.
                 </p>
-                <div className="flex items-center justify-center font-semibold mt-6 mb-3">
+                <div className="flex items-center justify-center font-semibold mt-2 mb-2">
                   <span className="">Find a home</span>
-                  <span className="pt-1">
+                  <span className="pt-1"> 
                     <HiArrowLongRight />
                   </span>
                 </div>

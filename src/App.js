@@ -13,7 +13,7 @@ import PrivateRoute from './components/PrivateRoute';
 import CreateList from './pages/CreateList';
 import EditList from './pages/EditList';
 import Listing from './pages/Listing';
-import Contact from './pages/Contact';
+import Contact from './pages/ContactUs';
 import Footer from './components/Footer';
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
         </Route>
         <Route path='/contact' element={<Contact/>}/>
       </Routes>
-      {/* <Footer/> */}
+      <Footer/>
      </Router>
      <ToastContainer
         position="bottom-left"

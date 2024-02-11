@@ -32,7 +32,7 @@ const ListingObject = ({listing, id, onEdit, onDelete}) => {
 
   return (
     <>
-      <div className='w-[370px] rounded-sm bg-[#fff] text-slate-500 overflow-hidden shadow-xl '>
+      <div className='w-full rounded-sm bg-[#fff] text-slate-500 overflow-hidden shadow-xl my-1'>
         <div className='relative'>
           <img loading='lazy' className='w-full object-cover hover:scale-105 transition-scale duration-200 ease-in' src={listing.imageUrl[0]} alt=''/>
           <Moment fromNow className='font-medium absolute left-3 bottom-2  px-2 py-1 rounded text-slate-400'>{listing.timeStamp?.toDate()}</Moment>
@@ -84,19 +84,19 @@ const ListingObject = ({listing, id, onEdit, onDelete}) => {
         </Link>
         
         <div className='flex justify-between items-center px-6 py-6  border-t'>
-            <div className='flex items-center gap-2'>
-              {
+             <div className='flex items-center gap-2'>
+              {/* {
                 listing.photoUrl && 
                 (<img className='h-8 w-8 rounded-full' src={listing.photoUrl} alt=''/>)
-              }
-              <div>
-                {
+              } */}
+               <div>
+                 {/* {
                   agentName && 
                   (<p>{agentName}</p>) 
-                }     
+                }       */}
                 <p className='text-xs text-slate'>Property Agent</p>
-              </div>
-            </div>
+              </div> 
+            </div> 
             <div className='flex text-slate-100 items-center gap-2'>
                { location.pathname !== '/profile' &&
                 (<>

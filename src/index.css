@@ -6,10 +6,67 @@ body {
     background-color: #fff;
 }
 
-.swiper-slide {
-    background-color: slateblue;
-    width: 500px !important;
-    height: 200px !important;
+.font-size-h {
+  font-size: clamp(1.5rem, 3vw, 2.5rem );
 }
 
+.font-size-p {
+  font-size: clamp(0.75rem, 2.5vw, 1.1rem);
+}
 
+.swiper-paginations .swiper-pagination-bullet {
+  
+  width: 10px;
+  height: 10px;
+  transition: all;
+  transition-duration: 300ms;
+    
+  }
+  
+  .swiper-paginations .swiper-pagination-bullet-active {
+    width: 14px;
+    height: 14px;
+    background-color: #ef2828 !important; 
+    
+  }
+
+  .swiper-slide { 
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .property-pagination .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    transition: all;
+    transition-duration: 300ms;
+
+  }
+  .property-pagination .swiper-pagination-bullet-active {
+    width: 14px;
+    height: 14px;
+    background-color: #ef2828 !important; 
+  }
+
+  .property-pagination .swiper-pagination-bullet:hover {
+    width: 14px;
+    height: 14px;
+    background-color: #ef2828 !important; 
+    opacity: 1;
+  }
+
+  .swiper-wrapper { 
+    
+    
+  }
+
+  .swiper {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  
+  .testimonial-wrapper .swiper {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+  }

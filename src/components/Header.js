@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import logo from '../assets/logo/logo.png'
+import logo from '../assets/logo/home-logo/logo.png'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 // import { auth } from '../config/firebase'
@@ -32,7 +32,7 @@ const Header = () => {
         <div >
             <img onClick={
               () => navigate('/')} 
-              className='h-[70px] w-[120px] cursor-pointer' 
+              className='cursor-pointer' 
               src={logo} alt=''/>
         </div>
         <div>

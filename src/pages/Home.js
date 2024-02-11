@@ -5,7 +5,7 @@ import FeaturedListing from './FeaturedListing';
 import AboutUs from '../components/AboutUs';
 // import clientImg from '../assets/images/client_img.jpg'
 import backgroundImage from '../assets/images/client_img.jpg'
-import Slider from '../components/Swiper';
+import TestimonialSlider from '../components/TestimonialSlider';
 
 const Home = () => {
 
@@ -27,7 +27,7 @@ const Home = () => {
           <h1  className='text-slate-900 font-size-h py-2 font-bold text-right'>The Right Place To Find Your Dream Home</h1>
           <p className='text-slate-600 text-right  py-4 px-6 font-size-p border-r border-orange-600 mb-4 mt-2'>We understand the significance of finding a perfect home and we are here to guide you every step to find your dream home</p>
         <div className='flex space-x-6 mt-2 justify-end items-center font-medium'>
-          <button className='text-slate-100 text-center px-5 py-3 uppercase bg-orange-600  font-size-p'>Our Services</button>
+          <button className='text-slate-100 text-center px-5 py-3 uppercase bg-orange-600  font-size-p '>Our Services</button>
           <button className='text-slate-800 text-center px-5 py-3 uppercase bg-  shadow-md font-size-p'>Learn more</button>
         </div>
         </div>
@@ -37,14 +37,16 @@ const Home = () => {
       <AboutUs />
     </section>
     <section>
-      <div className='my-24'>
+      <div className='my-40'>
         <h1 className='text-center mb-2'><span className='text-red-500 text-lg  px-4 py-2  font-semibold'>Properties</span></h1>
         <h1 className='text-xl text-slate-900  m-9 font-bold px-20'>Featured Listing</h1>
+        <div className='mx-6'>
         <FeaturedListing />
+        </div>
       </div>
     </section>
     <section
-      className='h-screen relative'>
+      className='h-screen relative '>
       <div
         style={{ backgroundImage: `url(${backgroundImage})`, 
               backgroundSize: 'cover',
@@ -56,15 +58,19 @@ const Home = () => {
       </div>
       <div
       
-      className="">
-       <div className='px-12 flex flex-col pt-28 relative'>
+        className="max-w-[80rem] relative mx-auto">
+        
+        <div className='testimonial-wrapper '>
+        <div className='px-12 flex flex-col pt-48 relative'>
          <p className='text-slate-100 font-size-p font-medium'>Client,s Testimonial</p>
          <h2 className='font-size-h text-slate-100 font-bold'>See What,s Our Client <br/> Says About Us</h2>
-       </div>
-      <Slider/>
+        </div>
+          <TestimonialSlider/>
+        </div>
 
       </div>
     </section>
+   
     </>
   )
 }
