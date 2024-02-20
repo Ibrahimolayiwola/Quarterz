@@ -16,19 +16,19 @@ const Dropdown = ({selected, setSelected}) => {
 
   return (
     <div className="dropdown w-full select-none cursor-pointer relative z-10">
-      <div className="dropdown-tn  text-slate-200 flex justify-between items-center mb-1 px-2 w-full border-2 border-[#4f0a7d] focus:outline-none focus:border-none focus:ring-[#a73eed] h-14" onClick={(e) => setIsActive(!isActive)}>
+      <div className="dropdown-tn  text-slate-600 flex justify-between items-center mb-1 px-2 w-full border-2 border-slate-200 focus:outline-none focus:border-none focus:ring-orange-600 h-14" onClick={(e) => setIsActive(!isActive)}>
         {selected}
-        <IoMdArrowDown className="text-[#a73eed]" />
+        <IoMdArrowDown className="text-orange-600" />
       </div>
       {isActive && (
-        <div className="dropdown-content rounded-md overflow-hidden shadow-2xl shadow-slate-800 absolute top-[110%] left-0 w-[100%] bg-[#205]">
+        <div className="dropdown-content rounded-md overflow-hidden shadow-2xl shadow-slate-200 absolute top-[110%] left-0 w-[100%] bg-white">
           {options.map((option) => (
             <div
               onClick={(e) => {
                 setSelected(option)
                 setIsActive(!isActive)
               }}
-              className="dropdown-item bg-transparent p-2 text-slate-400 hover:bg-[#220055d5]"
+              className="dropdown-item bg-transparent p-2 text-slate-600 hover:bg-slate-100"
             >
               {option}
             </div>
