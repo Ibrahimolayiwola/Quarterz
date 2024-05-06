@@ -12,6 +12,7 @@ body {
 
 .font-size-h {
   font-size: clamp(1.5rem, 3vw, 2.5rem );
+  line-height: normal;
 }
 
 .font-size-p {
@@ -33,11 +34,9 @@ body {
     background-color: #ef2828 !important; 
     
   }
-
-  .swiper-slide { 
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
+  
+  .custom-swiper-width {
+    width: clamp(200px, 90vw, 45rem);
   }
 
   .property-pagination .swiper-pagination-bullet {
@@ -60,12 +59,13 @@ body {
     opacity: 1;
   }
 
-  .swiper-wrapper { 
-    
-    
+
+  .testimonial-wrapper .swiper {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
   }
 
-  .swiper {
+  .featured-listing .swiper {
     padding-left: 10px !important;
     padding-right: 10px !important;
   }
@@ -74,3 +74,44 @@ body {
     padding-left: 30px !important;
     padding-right: 30px !important;
   }
+
+  .property-pagination .swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color: #000;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+
+  .myProperty-pagination .swiper-pagination-bullet {
+    width: 14px;
+    height: 14px;
+    transition: all;
+    transition-duration: 300ms;
+    color: #000;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.2);
+
+  } 
+  .mProperty-pagination .swiper-pagination-bullet-active {
+    width: 14px;
+    height: 14px;
+    background-color: #ef2828 !important; 
+  }
+
+  .myProperty-pagination .swiper-pagination-bullet:hover {
+    width: 14px;
+    height: 14px;
+    background-color: #ef2828 !important; 
+    opacity: 1;
+  }
+
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset; /* Example background color */
+    border-color: inherit; /* Inherit border color */
+}
+  

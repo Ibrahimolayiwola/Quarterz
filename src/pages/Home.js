@@ -40,7 +40,7 @@ const Home = () => {
       <div className='my-40'>
         <h1 className='text-center mb-2'><span className='text-red-500 text-lg  px-4 py-2  font-semibold'>Properties</span></h1>
         <h1 className='text-xl text-slate-900  m-9 font-bold px-20'>Featured Listing</h1>
-        <div className='mx-6'>
+        <div className='mx-6 featured-listing'>
         <FeaturedListing />
         </div>
       </div>

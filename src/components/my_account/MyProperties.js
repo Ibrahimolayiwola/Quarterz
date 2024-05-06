@@ -5,22 +5,24 @@ import "swiper/css/pagination";
 import { Pagination, Mousewheel, Autoplay, Navigation } from "swiper/modules";
 import { getAuth } from "firebase/auth";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
-import { dataBase } from "../config/firebase.js";
+import { dataBase } from "../../config/firebase.js";
 import Moment from "react-moment";
 import { CiLocationOn } from "react-icons/ci";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { MdOutlineStar } from "react-icons/md";
 import { MdOutlineStarHalf } from "react-icons/md";
 import { MdOutlineStarBorder } from "react-icons/md";
+import Spinner from "../Spinner.js";
 
-const PropertySlider = () => {
+const MyProperties = () => {
   const auth = getAuth();
   const swiperRef = useRef()
   const [myListing, setMyListing] = useState([]);
   const size = 3;
+  const [loading, setLoading] = useState(true)
 
   const pagination = {
-    el:'.property-pagination',
+    el:'.myProperty-pagination',
     clickable: true,
     type: 'bullets'
   }
@@ -54,24 +56,30 @@ const PropertySlider = () => {
       });
       chunkList = arrayChunk(listing);
       setMyListing(chunkList);
+      setLoading(false)
     };
 
     fetchUserListing();
   }, [auth.currentUser.uid]);
 
+  if (loading) {
+    console.log('spinner on the way')
+    return <Spinner />
+  }
+
   return (
     <>
 
-      <div className='flex justify-between items-center py-6 text-slate-900 font-medium'>
-        <p>My Properties</p>
-        <p className='space-x-10 text-center'>
-          <span>Date added</span>
-          <span>Actions</span>
-          <span>Delete</span>
+      <div className='xl:flex justify-between items-center py-6 text-slate-900 font-medium max-xl:w-[85%] max-xl:mx-auto xl:px-2'>
+        <p className="max-xl:mb-4 max-xl:border-b max-xl:border-b-slate-200 max-xl:p-2">My Properties</p>
+        <p className='xl:space-x-10 max-xl:flex max-xl:flex-col'>
+          <span className=" max-xl:border-y max-xl:border-y-slate-200 max-xl:p-2">Date added</span>
+          <span className=" max-xl:border-b max-xl:border-b-slate-200 max-xl:p-2">Actions</span>
+          <span className=" max-xl:border-b max-xl:border-b-slate-200 max-xl:p-2">Delete</span>
         </p>
       </div>
       <Swiper 
-      className="w-full"
+      className=""
        ref={swiperRef}
       pagination={pagination}
       // autoplay={{
@@ -91,9 +99,9 @@ const PropertySlider = () => {
           console.log(lists, index)
           return (
           <SwiperSlide 
-           className="w-full"
+           className=""
            key={index}>
-            <ul className=" w-full">
+            <ul className="max-xl:w-[85%] max-xl:mx-auto">
               {lists.map((list) => {
                 const {
                   data: { name, timeStamp, address, imageUrl },
@@ -101,22 +109,22 @@ const PropertySlider = () => {
                 } = list;
                 return (
                   <li key={id} 
-                     className="flex justify-between w-full items-center py-6 border-y border-t-slate-200 border-b-slate-200">
-                    <div className="flex justify-center items-center gap-4">
-                      <div>
+                     className="xl:flex xl:justify-between xl:items-center xl:py-6 xl:border-y xl:border-t-slate-200 xl:border-b-slate-200">
+                    <div className="xl:flex xl:justify-center xl:items-center xl:gap-4 ">
+                      <div className="p-2">
                         <img
-                          className="w-40 h-28"
+                          className="xl:w-40 xl:h-28"
                           src={imageUrl[0]}
                           alt="property"
                         />
                       </div>
-                      <div>
-                        <p>{name}</p>
-                        <p className="flex items-center gap-1 mt-1">
+                      <div className=" max-xl:border-t max-xl:border-t-slate-200 max-xl:p-2 max-xl:mt-2 max-xl:text-sm">
+                        <p className="">{name}</p>
+                        <p className="flex items-center gap-1 mt-2">
                           <CiLocationOn />
                           {address}
                         </p>
-                        <div className="text-yellow-500 text-sm flex gap-[1.5px] mt-1 justify-center items-center">
+                        <div className="text-yellow-500 text-sm flex gap-[1.5px] mt-2 xl:justify-center items-center">
                           <MdOutlineStar />
                           <MdOutlineStar />
                           <MdOutlineStar />
@@ -126,12 +134,12 @@ const PropertySlider = () => {
                         </div>
                       </div>
                     </div>
-                    <div className=" space-x-12 text-center pr-8">
-                      <Moment format="MMM DD, YYYY">
+                    <div className=" xl:space-x-12 xl:text-center xl:pr-8 max-xl:flex max-xl:flex-col max-xl:text-sm">
+                      <Moment format="MMM DD, YYYY" className="max-xl:mt-3 max-xl:border-y max-xl:border-y-slate-200 max-xl:p-2">
                         {timeStamp?.toDate()}
                       </Moment>
-                      <button>Edit</button>
-                      <button>
+                      <button className="max-xl:text-left  max-xl:border-b max-xl:border-b-slate-200 max-xl:p-2">Edit</button>
+                      <button className=" max-xl:border-b max-xl:border-b-slate-200 max-xl:p-2">
                         <RiDeleteBin5Line />
                       </button>
                     </div>
@@ -141,12 +149,15 @@ const PropertySlider = () => {
             </ul>
           </SwiperSlide>
           )})}
-        <div className="property-pagination bg-slate-400 absolute top-0 left-0">
-
-        </div>
+        
       </Swiper>
+      <div className="myProperty-pagination flex justify-center items-center gap-2 cursor-pointer p-4">
+
+      </div>
     </>
   );
 };
+   
 
-export default PropertySlider;
+
+export default MyProperties

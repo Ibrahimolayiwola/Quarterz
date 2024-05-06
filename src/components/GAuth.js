@@ -1,7 +1,6 @@
 import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
-import { GoogleAuthProvider } from 'firebase/auth'
-import { signInWithPopup } from 'firebase/auth'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import {auth, dataBase} from '../config/firebase'
 import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
@@ -28,7 +27,7 @@ const GAuth = () => {
     }
   }
   return (
-    <button type='button' onClick={signInWithGoogle} className='w-full bg-red-700 text-slate-200 flex justify-center items-center gap-2 p-2 rounded-md hover:bg-red-800 transition duration-200 shadow-lg'>
+    <button type='button' onClick={signInWithGoogle} className=' bg-white text-orange-700 w-[45%] max-sm:text-xs flex justify-center items-center gap-2 py-4 px-2 transition duration-200 shadow-lg'>
               <FcGoogle />
               Continue with Google
     </button>

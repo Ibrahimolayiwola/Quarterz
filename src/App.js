@@ -15,33 +15,44 @@ import EditList from './pages/EditList';
 import Listing from './pages/Listing';
 import Contact from './pages/ContactUs';
 import Footer from './components/Footer';
+import TabComponent from './components/my_account/TabComponent';
+import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
   return (
     <>
-    <Router>
-    <Header/>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/profile' element={<PrivateRoute />}>
-         <Route path='/profile' element={<Profile />} />
-        </Route>
-        <Route path='/sign-in' element={<SignIn />} />
-        <Route path='/sign-up' element={<SignUp />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
-        <Route path='/offers' element={<Offers />} />
-        <Route path='/category/:categoryName/:listingId' element={<Listing />} />
-        <Route path='/create-list' element={<PrivateRoute />}>
-          <Route path='/create-list' element={<CreateList />} />
-        </Route>
-        <Route path='/edit-list' element={<PrivateRoute />}>
-          <Route path='/edit-list/:listingId' element={<EditList />} />
-        </Route>
-        <Route path='/contact' element={<Contact/>}/>
-      </Routes>
-      <Footer/>
-     </Router>
-     <ToastContainer
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<PrivateRoute />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/offers" element={<Offers />} />
+          <Route
+            path="/category/:categoryName/:listingId"
+            element={<Listing />}
+          />
+          <Route path="/create-list" element={<PrivateRoute />}>
+            <Route path="/create-list" element={<CreateList />} />
+          </Route>
+          <Route path="/edit-list" element={<PrivateRoute />}>
+            <Route path="/edit-list/:listingId" element={<EditList />} />
+          </Route>
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/my-account" element={<PrivateRoute />}>
+            <Route path="/my-account" element={<TabComponent />} />
+          </Route>
+          <Route path="/sign-up/verify-email" element={<PrivateRoute />}>
+            <Route path="/sign-up/verify-email" element={<VerifyEmail />} />
+          </Route>
+        </Routes>
+        <Footer />
+      </Router>
+      <ToastContainer
         position="bottom-left"
         autoClose={5000}
         hideProgressBar={false}
@@ -54,7 +65,6 @@ function App() {
         theme="dark"
       />
     </>
-     
   );
 }
 

@@ -89,7 +89,7 @@ const TestimonialSlider = () => {
       >
         {
           clientData.map(client => (
-            <SwiperSlide className=' swiper-slide rounded-md bg-[#fff] shadow-md my-6'>
+            <SwiperSlide key={client.name} className=' swiper-slide rounded-md bg-[#fff] shadow-md my-6'>
           <div className='p-8'>
             <div className='flex justify-between items-center max-lg:flex-col-reverse gap-3'>
               <div className='flex items-center gap-4'>

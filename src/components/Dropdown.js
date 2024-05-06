@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { IoMdArrowDropdown } from "react-icons/io";
 import { IoMdArrowDown } from "react-icons/io";
 
 const Dropdown = ({selected, setSelected}) => {

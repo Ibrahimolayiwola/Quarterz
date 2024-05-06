@@ -15,11 +15,14 @@ const useValidate = values => {
             newErrors.password = 'Password required'
         }else if (values.password.length < 4) {
             newErrors.password = 'Password must not be less than 4 characters'
-        }else if (values.password.length > 10){
-            newErrors.password = 'Password must not be greater than 10 characters'
+        }else if (values.password.length > 14){
+            newErrors.password = 'Password must not be greater than 14 characters'
+        }else if(values.password !== values.confirmPassword){
+            newErrors.confirmPassword = 'Password does not match'
         }
         
         setFormErrors(newErrors)
+        return newErrors;
     }
 
     return [formErrors, validate]
