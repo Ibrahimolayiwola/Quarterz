@@ -1,34 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import emailIcon from "../assets/contactUs-icon/contact-icon-1.png";
-import { auth, dataBase } from "../config/firebase";
-import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
-import { doc, setDoc } from "firebase/firestore";
+import { auth } from "../config/firebase";
 
 const VerifyEmail = () => {
   const [email, setEmail] = useState("");
-  const navigate = useNavigate();
-  const userData = useSelector((state) => state.form);
-  const [userVerified, setUserVerified] = useState(false);
-
-  const uploadData = useCallback(async () => {
-    try {
-      await setDoc(doc(dataBase, "users", auth.currentUser.uid), userData);
-      navigate("/");
-    } catch (error) {
-      console.error(error.message);
-    }
-  }, [userData, navigate]);
 
   useEffect(() => {
-    const { email, emailVerified } = auth.currentUser;
+    const { email } = auth.currentUser;
     setEmail(email);
-    setUserVerified(emailVerified);
+  }, []);
 
-    if (userVerified) {
-      uploadData();
-    }
-  }, [uploadData]);
   return (
     <div className="flex flex-col justify-center items-center gap-10 mt-16 text-slate-700">
       <div>

@@ -109,6 +109,7 @@ const Profile = () => {
       setListings(listing);
       setLoading(false);
       console.log(auth.currentUser);
+      console.log(process.env.REACT_APP_API_KEY);
     };
     fetchUserListing();
   }, []);
