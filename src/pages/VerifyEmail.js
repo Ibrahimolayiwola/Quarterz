@@ -3,12 +3,12 @@ import emailIcon from "../assets/contactUs-icon/contact-icon-1.png";
 import { auth } from "../config/firebase";
 
 const VerifyEmail = () => {
-  const [email, setEmail] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const { email } = auth.currentUser;
 
   useEffect(() => {
-    const { email } = auth.currentUser;
-    setEmail(email);
-  }, []);
+    setUserEmail(email);
+  }, [email]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-10 mt-16 text-slate-700">
@@ -21,7 +21,7 @@ const VerifyEmail = () => {
         </h1>
         <p className="text-center text-slate-500 leading-6">
           We just sent an email to the address: <br />
-          {email} <br />
+          {userEmail} <br />
           Please check your email and select the link provided to <br /> verify
           your address.
         </p>

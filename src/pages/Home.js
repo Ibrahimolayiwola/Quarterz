@@ -12,16 +12,18 @@ import { doc, setDoc } from "firebase/firestore";
 
 const Home = () => {
   const formDataCopy = useSelector((state) => state.form);
+  const userVerified = auth?.currentUser?.emailVerified;
   const uploadData = useCallback(async () => {
     await setDoc(doc(dataBase, "users", auth.currentUser.uid), formDataCopy);
   }, [formDataCopy]);
 
   useEffect(() => {
-    const userVerified = auth?.currentUser?.emailVerified;
+    console.log(auth, "from home");
     if (userVerified) {
       uploadData();
+      console.log("data uploaded successfully");
     }
-  }, [uploadData]);
+  }, [uploadData, userVerified]);
 
   return (
     <>
