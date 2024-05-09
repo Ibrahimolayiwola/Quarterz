@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import homeImg from "../assets/images/home-img.png";
 import { FaHome } from "react-icons/fa";
 import FeaturedListing from "./FeaturedListing";
@@ -8,21 +8,30 @@ import backgroundImage from "../assets/images/client_img.jpg";
 import TestimonialSlider from "../components/TestimonialSlider";
 import { auth, dataBase } from "../config/firebase";
 import { useSelector } from "react-redux";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const Home = () => {
   const formDataCopy = useSelector((state) => state.form);
-  const userVerified = auth?.currentUser?.emailVerified;
+  const [userVerified, setUserVerified] = useState(false);
   const uploadData = useCallback(async () => {
-    await setDoc(doc(dataBase, "users", auth.currentUser.uid), formDataCopy);
-  }, [formDataCopy]);
+    if (userVerified) {
+      const docRef = doc(dataBase, "users", auth.currentUser.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        return;
+      }
+      await setDoc(docRef, formDataCopy);
+    }
+  }, [formDataCopy, userVerified]);
 
   useEffect(() => {
-    console.log(auth, "from home");
-    if (userVerified) {
-      uploadData();
-      console.log("data uploaded successfully");
-    }
+    auth.onAuthStateChanged((userCred) => {
+      if (userCred) {
+        const { emailVerified } = userCred;
+        setUserVerified(emailVerified);
+      }
+    });
+    uploadData();
   }, [uploadData, userVerified]);
 
   return (
