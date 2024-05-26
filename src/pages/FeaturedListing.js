@@ -1,7 +1,7 @@
 import { collection, getDocs, limit, orderBy, query, where } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
 import { dataBase } from '../config/firebase'
-import ListingObject from '../components/ListingObject'
+import ListingObject from "../components/PropertyItem";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -19,9 +19,9 @@ const FeaturedListing = () => {
       firstProp: "type",
       secondProp: "rent",
     };
-    const listing = [];
+    const property = [];
     const fetchListing = async ({ firstProp, secondProp }) => {
-      const docRef = collection(dataBase, "listings");
+      const docRef = collection(dataBase, "properties");
       const q = query(
         docRef,
         where(firstProp, "==", secondProp),
@@ -31,14 +31,17 @@ const FeaturedListing = () => {
 
       try {
         const querySnap = await getDocs(q);
+        if (querySnap.empty) {
+          return;
+        }
         querySnap.forEach((doc) => {
-          listing.push({
+          property.push({
             id: doc.id,
             data: doc.data(),
           });
         });
 
-        setFeaturedListing(listing);
+        setFeaturedListing(property);
       } catch (error) {
         console.error(error);
       }
@@ -79,12 +82,11 @@ const FeaturedListing = () => {
         {featuredListing &&
           featuredListing.map(({ id, data }) => (
             <SwiperSlide className="" key={id}>
-              <ListingObject listing={data} id={id} />
+              <ListingObject property={data} id={id} />
             </SwiperSlide>
           ))}
-          <p className='property-pagination text-center  mt-8  flex items-center justify-center gap-1'></p>
+        <p className="property-pagination text-center  mt-8  flex items-center justify-center gap-1"></p>
       </Swiper>
-      
     </>
   );
 };

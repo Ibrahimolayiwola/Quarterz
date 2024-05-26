@@ -12,10 +12,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './components/PrivateRoute';
 import CreateList from './pages/CreateList';
 import EditList from './pages/EditList';
-import Listing from './pages/Listing';
-import Contact from './pages/ContactUs';
-import Footer from './components/Footer';
-import TabComponent from './components/my_account/TabComponent';
+import Property from "./pages/Property";
+import Contact from "./pages/ContactUs";
+import Footer from "./components/Footer";
+import TabComponent from "./components/my_account/TabComponent";
 import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
@@ -33,8 +33,8 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/offers" element={<Offers />} />
           <Route
-            path="/category/:categoryName/:listingId"
-            element={<Listing />}
+            path="/category/:categoryName/:propertyId"
+            element={<Property />}
           />
           <Route path="/create-list" element={<PrivateRoute />}>
             <Route path="/create-list" element={<CreateList />} />

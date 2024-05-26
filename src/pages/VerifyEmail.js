@@ -1,14 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import emailIcon from "../assets/contactUs-icon/contact-icon-1.png";
-import { auth } from "../config/firebase";
+import { auth, dataBase } from "../config/firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useSelector } from "react-redux";
 
 const VerifyEmail = () => {
   const [userEmail, setUserEmail] = useState("");
   const { email } = auth.currentUser;
+  const [userVerified, setUserVerified] = useState(false);
+  const formDataCopy = useSelector((state) => state.form);
+  const [user, setUser] = useState(null);
+  const emailVerified = user ? user.emailVerified : false;
+  const uploadData = useCallback(async () => {
+    if (userVerified) {
+      const docRef = doc(dataBase, "users", auth.currentUser.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        return;
+      }
+      await setDoc(docRef, formDataCopy);
+    }
+  }, [formDataCopy, userVerified]);
 
   useEffect(() => {
     setUserEmail(email);
-  }, [email]);
+
+    const unsubscribe = auth.onAuthStateChanged((userCred) => {
+      if (userCred) {
+        setUser(userCred);
+      }
+    });
+
+    setUserVerified(emailVerified);
+    uploadData();
+    return () => unsubscribe();
+  }, [email, uploadData, emailVerified]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-10 mt-16 text-slate-700">

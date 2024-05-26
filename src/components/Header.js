@@ -28,44 +28,58 @@ const Header = () => {
   },[auth])
 
   return (
-    <div className='bg-[#fff] w-full sticky top-0 z-50 shadow-2xl h-[70px]  left-0'>
-      <header className='max-w-6xl mx-auto flex justify-between items-center z-50'>
-        <div className=' w-auto flex justify-center items-center cursor-pointer' 
-             onClick={() => navigate('/')}>
-           <TiHomeOutline className='text-orange-600 text-4xl'/>
-           <span className=' text-3xl font-bold text-slate-700'>Quarterz</span>
+    <div className="overflow-hidden w-full sticky top-0 z-50 shadow-2xl h-[70px] bg-[#fff]  left-0">
+      <header className="max-w-6xl mx-auto flex justify-between items-center z-50">
+        <div
+          className=" w-auto flex justify-center items-center cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          <TiHomeOutline className="text-orange-600 text-4xl" />
+          <span className=" text-3xl font-bold text-slate-700">Quarterz</span>
         </div>
         <div>
-            <ul className='text-red-500 font-medium flex space-x-12 items-center'>
-                <li 
-                  onClick={
-                  () => navigate('/')} 
-                  className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-orange-600 cursor-pointer py-5 ${pathMatchRoute('/') && "border-b-2 border-b-orange-600 font-semibold"}`}>
-                    Home
-                </li>
-                <li 
-                  onClick={
-                  () => navigate('/offers')} 
-                  className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-orange-600 cursor-pointer py-5 ${pathMatchRoute('/offers') && "border-b-2 border-b-orange-600 font-semibold"}`}>
-                    Offers
-                </li>
-                <li 
-                  onClick={
-                  () => navigate('/profile')} 
-                  className={`border-b-[1px] text-sm transition ease-out duration-300 border-b-transparent font-semibold hover:border-b-orange-600 cursor-pointer py-5 ${(pathMatchRoute('/sign-in') || pathMatchRoute('/profile')) && "border-b-orange-600 font-semibold"}`}>
-                    {pageState}
-                </li>
-                <li 
-                  onClick={
-                  () => navigate('/contact')} 
-                  className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-orange-600 cursor-pointer py-5 ${pathMatchRoute('/offers') && "border-b-2 border-b-orange-600 font-semibold"}`}>
-                    Contact
-                </li>
-            </ul>
+          <ul className="text-red-500 font-medium flex space-x-12 items-center">
+            <li
+              onClick={() => navigate("/")}
+              className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-orange-600 cursor-pointer py-5 ${
+                pathMatchRoute("/") &&
+                "border-b-2 border-b-orange-600 font-semibold"
+              }`}
+            >
+              Home
+            </li>
+            <li
+              onClick={() => navigate("/offers")}
+              className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-orange-600 cursor-pointer py-5 ${
+                pathMatchRoute("/offers") &&
+                "border-b-2 border-b-orange-600 font-semibold"
+              }`}
+            >
+              Offers
+            </li>
+            <li
+              onClick={() => navigate("/profile")}
+              className={`border-b-[1px] text-sm transition ease-out duration-300 border-b-transparent font-semibold hover:border-b-orange-600 cursor-pointer py-5 ${
+                (pathMatchRoute("/sign-in") || pathMatchRoute("/profile")) &&
+                "border-b-orange-600 font-semibold"
+              }`}
+            >
+              {pageState}
+            </li>
+            <li
+              onClick={() => navigate("/contact")}
+              className={`border-b-[1px] text-sm border-b-transparent font-semibold hover:border-b-orange-600 cursor-pointer py-5 ${
+                pathMatchRoute("/offers") &&
+                "border-b-2 border-b-orange-600 font-semibold"
+              }`}
+            >
+              Contact
+            </li>
+          </ul>
         </div>
       </header>
     </div>
-  )
+  );
 }
 
 export default Header

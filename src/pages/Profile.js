@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { ImHome } from "react-icons/im";
 import { deleteObject, ref } from "firebase/storage";
-import ListingObject from "../components/ListingObject";
+import ListingObject from "../components/PropertyItem";
 
 const Profile = () => {
   const fetchedData = {
