@@ -11,14 +11,17 @@ const useValidate = values => {
         }else if (!regex.test(values.email)){
             newErrors.email = 'This is not a valid email address'
         }
-        if (!values.password){
-            newErrors.password = 'Password required'
-        }else if (values.password.length < 4) {
-            newErrors.password = 'Password must not be less than 4 characters'
-        }else if (values.password.length > 14){
-            newErrors.password = 'Password must not be greater than 14 characters'
-        }else if(values.password !== values.confirmPassword){
-            newErrors.confirmPassword = 'Password does not match'
+        if (!values.password) {
+          newErrors.password = "Password required";
+        } else if (
+          !regex.test(values.password) ||
+          values.password.length < 8 ||
+          values.password.length > 64
+        ) {
+          newErrors.password =
+            "Password must be 8-64 characters long, and include uppercase, lowercase, number, and special character.";
+        } else if (values.password !== values.confirmPassword) {
+          newErrors.confirmPassword = "Password does not match";
         }
         
         setFormErrors(newErrors)

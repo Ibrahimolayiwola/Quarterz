@@ -27,18 +27,21 @@ const SignIn = () => {
   }
 
   const onSignIn = async e => {
-    e.preventDefault()
-    const validateError = validate();
-    if (Object.keys(validateError).length !== 0) {
-      return;
-    }
+    e.preventDefault();
+    // const validateError = validate();
+    // if (Object.keys(validateError).length !== 0) {
+    //   return;
+    // }
 
     try {
-      const userCredentials = await signInWithEmailAndPassword(auth, email, password)
-      if (userCredentials) 
-      navigate('/')
-    } catch (err){
-      toast.error('invalid user credentials')
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (userCredentials) navigate("/");
+    } catch (err) {
+      toast.error("invalid user credentials");
     }
   }
 
