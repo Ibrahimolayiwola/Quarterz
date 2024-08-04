@@ -124,3 +124,16 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+.property-slide .swiper-slide {
+  width: 60%;
+}
+
+.property-slide .swiper-slide:nth-child(2n) {
+  width: 40%;
+}
+
+.property-slide .swiper-slide:nth-child(3n) {
+  width: 20%;
+}
+

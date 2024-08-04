@@ -1,0 +1,19 @@
+.swiperSlide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 20% !important; */
+}
+
+/* .swiperContainer .swiper- :nth-child(2) {
+    width: 80% !important;
+} */
+
+
+.swiper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

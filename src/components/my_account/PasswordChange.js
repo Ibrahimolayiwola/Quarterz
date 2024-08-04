@@ -96,7 +96,7 @@ const PasswordChange = () => {
         </div>
         <button
           type="submit"
-          className="h-14 w-44 bg-orange-600 text-slate-100 text-lg"
+          className="h-14 w-44 bg-orange-600 text-slate-100 text-lg hover:bg-black"
         >
           Save changes
         </button>

@@ -18,7 +18,7 @@ const MyProperties = () => {
   const auth = getAuth();
   const swiperRef = useRef()
   const [myProperties, setMyProperties] = useState([]);
-  const size = 3;
+ 
   const [loading, setLoading] = useState(true);
 
   const pagination = {
@@ -27,7 +27,7 @@ const MyProperties = () => {
     type: "bullets",
   };
 
-  const arrayChunk = (arr) => {
+  const arrayChunk = (arr, size) => {
     return arr.reduce(
       (chunk, _, index) =>
         index % size === 0 ? [...chunk, arr.slice(index, index + size)] : chunk,
@@ -57,7 +57,7 @@ const MyProperties = () => {
             data: doc.data(),
           });
         });
-        chunkList = arrayChunk(property);
+        chunkList = arrayChunk(property, 3);
         setMyProperties(chunkList);
 
         setLoading(false);
