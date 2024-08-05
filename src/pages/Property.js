@@ -123,10 +123,12 @@ const Property = () => {
               spaceBetween={0}
               freeMode={true}
               pagination={{
+                el: ".pagination",
+                type: "bullets",
                 clickable: true,
               }}
               modules={[Pagination, FreeMode, Autoplay]}
-              className="swiper w-full swiperContainer"
+              className=" w-full"
             >
               {imageUrls.map((url, index) => (
                 <SwiperSlide className="swiperSlide" key={index}>
@@ -143,16 +145,17 @@ const Property = () => {
                   />
                 </SwiperSlide>
               ))}
+              <div className="pagination text-center mt-8 z-20 flex items-center justify-center gap-1"></div>
             </Swiper>
           </div>
-          <div className="flex items-center mt-20 justify-around px-6">
-            <div className=" space-y-4 max-w-[500px]  p-4">
-              <div className="flex justify-start items-center gap-6 text-sm">
+          <div className="flex items-center mt-20 justify-around px-6 flex-wrap  w-full gap-8">
+            <div className=" space-y-4  p-4 max-w-[500px] max-sm:max-w-[95%]">
+              <div className="flex justify-start items-center gap-6 text-sm flex-wrap">
                 <p className="uppercase px-2 py-1 bg-orange-600 text-white font-medium text-sm">
                   featured
                 </p>
                 <p className="uppercase px-2 py-1 bg-orange-400 text-white font-medium text-sm">
-                  for rent
+                  for {type === "rent" ? "rent" : "sale"}
                 </p>
                 <p className="flex justify-center items-center gap-2">
                   <BsCalendarDate className="text-rose-500" />
@@ -163,30 +166,27 @@ const Property = () => {
                   <span>35 Comments</span>
                 </p>
               </div>
-              <p className="text-2xl font-bold">Diamond Manor Apartment</p>
+              <p className="text-2xl font-bold">{name}</p>
               <p className="flex items-center gap-1">
                 <IoLocationSharp className="text-orange-600" />
-                <span>Belmont Gardens, Chicago</span>
+                <span>{address}</span>
               </p>
               <div>
                 <p className="text-2xl font-bold pb-1">Description</p>
-                <p className="text-sm text-slate-600">
-                  To the left is the modern kitchen with central island, leading
-                  through to the unique breakfast family room which feature
-                  glass walls and doors out onto the garden and access to the
-                  separate utility room.
+                <p className="text-sm text-slate-600 max-sm:text-justify">
+                  {description}
                 </p>
               </div>
               <div>
                 <p className="text-2xl font-bold pb-2">Property Details</p>
                 <div>
-                  <ul className="grid grid-cols-2 gap-6 bg-slate-100 w-[400px] p-8  rounded-md">
+                  <ul className="grid grid-cols-2 max-sm:grid-cols-1 gap-6 bg-slate-100 p-8  rounded-md">
                     <li className="flex items-center gap-2">
                       <span className="inline-block p-2 bg-orange-300 text-xl text-orange-600 rounded-sm">
                         <FaBed className="align-middle " />
                       </span>
                       <p className="text-slate-600 text-sm font-medium">
-                        4 Bedrooms
+                        {beds === 1 ? "1 Bedroom" : `${beds} Bedrooms`}
                       </p>
                     </li>
                     <li className="flex items-center gap-2">
@@ -194,44 +194,62 @@ const Property = () => {
                         <MdBathtub className="align-middle " />
                       </span>
                       <p className="text-slate-600 text-sm font-medium">
-                        4 Bathrooms
+                        {baths === 1 ? "1 Bathroom" : `${baths} bathrooms`}
                       </p>
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="inline-block p-2 bg-orange-300 text-xl text-orange-600 rounded-sm">
-                        <FaSquareParking className="align-middle " />
-                      </span>
-                      <p className="text-slate-600 text-sm font-medium">
-                        Parking spot
-                      </p>
+                      {parking ? (
+                        <>
+                          <span className="inline-block p-2 bg-orange-300 text-xl text-orange-600 rounded-sm">
+                            <FaSquareParking className="align-middle " />
+                          </span>
+                          <span className="text-slate-600 text-sm font-medium">
+                            Parking spot
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="inline-block p-2 bg-orange-300 text-xl text-orange-600 rounded-sm">
+                            <BsFillSignNoParkingFill className="align-middle" />
+                          </span>
+
+                          <span className="text-slate-600 text-sm font-medium">
+                            No Parking
+                          </span>
+                        </>
+                      )}
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="inline-block p-2 bg-orange-300 text-xl text-orange-600 rounded-sm">
                         <MdChair className="align-middle " />
                       </span>
                       <p className="text-slate-600 text-sm font-medium">
-                        Furnished
+                        {furnished ? (
+                          <span className="text-sm">Furnished</span>
+                        ) : (
+                          <span className="text-sm">Not Furnished</span>
+                        )}
                       </p>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
-            <div className="max-w-[500px]">
+            <div className="max-w-[500px] max-sm:max-w-[95%]">
               <div className="bg-orange-500 text-slate-100 rounded-t-md py-2 font-bold">
                 <p className="text-center">Managed By</p>
               </div>
-              <div className="w-[500px] space-y-6 bg-white shadow-lg p-6">
+              <div className=" space-y-6 bg-white shadow-lg p-6">
                 <div>
-                  <div className="flex items-center justify-around">
-                    <div>
+                  <div className="flex flex-wrap gap-6 items-center justify-center">
+                    <div className="">
                       <img
-                        className="rounded-full h-[110px] w-[110px]"
+                        className="rounded-full h-[110px] w-[110px] "
                         src={agentImage}
                         alt="agent"
                       />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <p className="text-indigo-600 text-sm mb-1 font-bold uppercase">
                         Jeff Kebeck
                       </p>
@@ -285,7 +303,7 @@ const Property = () => {
                     <p className="font-bold text-sm">Quaterz Ratings</p>
                     <div className="border-b-[1.5px] border-b-orange-500 flex-1"></div>
                   </div>
-                  <div className="flex gap-3 items-center my-2 justify-center">
+                  <div className="flex flex-wrap gap-3 items-center my-2 justify-center">
                     <div className="flex flex-col justify-center text-center bg-slate-100 gap-1 py-2 text-xs px-3 rounded-md">
                       <p>Onboarding</p>
                       <div className="flex items-center gap-1 justify-center">
@@ -347,7 +365,7 @@ const Property = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-3 items-center my-2 justify-center">
+                  <div className="flex flex-wrap gap-3 items-center my-2 justify-center">
                     <div className="flex flex-col justify-center bg-slate-100 text-xs gap-1 py-2 px-3 rounded-md">
                       <p>Tenant Experience</p>
                       <div className="flex items-center gap-1 justify-center">
@@ -395,7 +413,7 @@ const Property = () => {
                     <p className="font-bold text-sm">Agent Profile</p>
                     <div className="border-b-[1.5px] border-b-orange-500 flex-1"></div>
                   </div>
-                  <div className="flex justify-center items-center gap-6 my-2">
+                  <div className="flex flex-wrap justify-center items-center gap-6 my-2">
                     <div className="space-x-2 pt-2">
                       <span className="inline-block p-1 rounded-md bg-indigo-500 text-white">
                         <CgFacebook className="align-middle" />
@@ -410,7 +428,7 @@ const Property = () => {
                         <FaInstagram className="align-middle" />
                       </span>
                     </div>
-                    <button className="bg-orange-500 text-slate-100 font-semibold px-4 py-1 text-sm flex-1 rounded-md">
+                    <button className="bg-orange-500 text-slate-100 font-semibold px-4 py-1 text-sm flex-1 rounded-md max-sm:text-xs min-w-[120px]">
                       Contact Agent
                     </button>
                   </div>
@@ -485,11 +503,7 @@ const Property = () => {
                   </li>
                   <li className="flex items-center">
                     <MdChair />
-                    {furnished ? (
-                      <span className="text-sm">Furnished</span>
-                    ) : (
-                      <span className="text-sm">Not Furnished</span>
-                    )}
+                    
                   </li>
                 </ul>
               </div>

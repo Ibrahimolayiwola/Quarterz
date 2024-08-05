@@ -11,20 +11,12 @@ const FeaturedListing = () => {
   const [featuredListing, setFeaturedListing] = useState([]);
 
   useEffect(() => {
-    const OfferQuery = {
-      firstProp: "offer",
-      secondProp: true,
-    };
-    const rentQuery = {
-      firstProp: "type",
-      secondProp: "rent",
-    };
     const property = [];
-    const fetchListing = async ({ firstProp, secondProp }) => {
+    const fetchListing = async () => {
       const docRef = collection(dataBase, "properties");
       const q = query(
         docRef,
-        where(firstProp, "==", secondProp),
+        where("type", "==", "sale"),
         orderBy("timeStamp", "desc"),
         limit(3)
       );
@@ -46,9 +38,7 @@ const FeaturedListing = () => {
         console.error(error);
       }
     };
-
-    fetchListing(rentQuery);
-    fetchListing(OfferQuery);
+    fetchListing();
     // handleLoading()
   }, []);
   return (
@@ -71,7 +61,7 @@ const FeaturedListing = () => {
         slidesPerView={1}
         spaceBetween={10}
         pagination={{
-          el: ".property-pagination",
+          el: ".pagination",
           type: "bullets",
           clickable: true,
         }}
@@ -85,7 +75,7 @@ const FeaturedListing = () => {
               <ListingObject property={data} id={id} />
             </SwiperSlide>
           ))}
-        <p className="property-pagination text-center  mt-8  flex items-center justify-center gap-1"></p>
+        <p className="pagination text-center  mt-8  flex items-center justify-center gap-1"></p>
       </Swiper>
     </>
   );

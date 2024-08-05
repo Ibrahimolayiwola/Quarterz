@@ -19,7 +19,7 @@ body {
   font-size: clamp(0.75rem, 2.5vw, 1.1rem);
 }
 
-.swiper-paginations .swiper-pagination-bullet {
+.pagination .swiper-pagination-bullet {
   
   width: 10px;
   height: 10px;
@@ -27,13 +27,15 @@ body {
   transition-duration: 300ms;
     
   }
-  
-  .swiper-paginations .swiper-pagination-bullet-active {
+
+  .pagination .swiper-pagination-bullet-active {
     width: 14px;
     height: 14px;
     background-color: #ef2828 !important; 
     
   }
+   /* VALID CLASSES  */
+
   
   .custom-swiper-width {
     width: clamp(200px, 90vw, 45rem);
@@ -125,7 +127,7 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-.property-slide .swiper-slide {
+/* .property-slide .swiper-slide {
   width: 60%;
 }
 
@@ -135,5 +137,5 @@ input[type=number] {
 
 .property-slide .swiper-slide:nth-child(3n) {
   width: 20%;
-}
+} */
 

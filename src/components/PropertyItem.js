@@ -48,7 +48,7 @@ const ListingObject = ({ property, id, onEdit, onDelete }) => {
         <div className="relative">
           <img
             loading="lazy"
-            className="w-full object-cover hover:scale-105 transition-scale duration-200 ease-in"
+            className="w-full h-[350px] object-cover hover:scale-105 transition-scale duration-200 ease-in"
             src={imageUrls[0]}
             alt=""
           />
