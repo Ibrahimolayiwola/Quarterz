@@ -14,9 +14,10 @@ const MyProfile = (e) => {
   const [userData, setUserData] = useState({});
   const auth = getAuth();
   const [image, setImage] = useState([]);
-  const { upLoadFile } = useUploadFile(image);
+  const { uploadFile } = useUploadFile(image);
   const [uploaded, setUploaded] = useState(true);
   const [imageUrl, setImageUrl] = useState("");
+  const { name, firstName, lastName, email, phone, address } = userData || null;
 
   const uploadImage = async () => {
     if (uploaded) {
@@ -25,8 +26,9 @@ const MyProfile = (e) => {
     if (userData.profileImage) {
       deleteImage(userData.profileImage);
     }
+    console.log(typeof uploadFile);
     try {
-      const url = await upLoadFile();
+      const url = await uploadFile();
       if (url) {
         setImageUrl(url);
         const docRef = doc(dataBase, "users", auth.currentUser.uid);
@@ -112,17 +114,18 @@ const MyProfile = (e) => {
           </div>
         </div>
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-slate-800">
-            {userData.firstName} {userData.lastName}
+          <h1 className="text-3xl font-bold text-orange-600">
+            {name ? name : `${firstName} ${lastName}`}
           </h1>
           <p className="flex text-slate-500  items-center gap-2">
-            <CiLocationOn /> {userData.address}
+            <CiLocationOn className="text-green-700" />{" "}
+            {address ? address : "Allen avenue, Lagos"}
           </p>
           <p className="flex text-slate-500 items-center gap-2">
-            <MdOutlinePhoneInTalk /> {userData.phone}
+            <MdOutlinePhoneInTalk /> {phone ? phone : "+1345726246"}
           </p>
           <p className="flex text-slate-500 items-center gap-2">
-            <GoMail /> {userData.email}
+            <GoMail className="text-orange-600" /> {email}
           </p>
         </div>
       </div>
