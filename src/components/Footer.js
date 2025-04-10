@@ -24,8 +24,8 @@ const Footer = () => {
   return (
     <>
       <div className="mt-60 relative">
-        <div className="w-[90%] sm:w-[80%] md:w-[90%] max-w-[75rem]  bg-orange-600 absolute left-0 right-0 -top-20  h-42 mx-auto p-12 mb-20">
-          <div className="flex flex-col gap-6 justify-between items-center md-lg:flex-row">
+        <div className="w-[90%] sm:w-[80%] md:w-[90%] max-w-[75rem]  bg-[#ff5a3c] absolute left-0 right-0 -top-20  h-42 mx-auto p-12 mb-20">
+          <div className="flex flex-col gap-6 justify-between items-center md-lg:flex-row max-w-7xl mx-auto">
             <div>
               <h1 className="font-size-h text-white font-bold">
                 Looking for a dream home?
@@ -45,7 +45,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="bg-black pt-40 ">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-20 lg-xl:flex lg-xl:gap-10 p-6 items-start justify-center xl:p-10 xl-2xl:p-24 2xl:px-36  2xl-3xl:px-40 2.6xl:px-40 2.6xl:gap-24 max-sm:pt-24">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-20 lg-xl:flex lg-xl:gap-10 p-6 items-start justify-center xl:p-10 xl-2xl:p-24 2xl:px-36  2xl-3xl:px-40 2.6xl:px-40 2.6xl:gap-24 max-sm:pt-24">
             <div className="text-slate-200 pb-6">
               <div className="">
                 <img src={logo} className=" cursor-pointer" />
@@ -121,7 +121,7 @@ const Footer = () => {
                   placeholder="Email*"
                   className="flex-1 py-4"
                 />
-                <div className="bg-orange-600 px-4 py-[20px] text-lg">
+                <div className="bg-[#ff5a3c] px-4 py-[20px] text-lg">
                   <IoIosSend />
                 </div>
               </div>

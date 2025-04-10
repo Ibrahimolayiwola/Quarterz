@@ -11,6 +11,9 @@ module.exports = {
         '2xl-3xl': '1600px',
         '2.6xl': '1740px'
        
+      },
+      colors: {
+        secondary: '#ff5a3c'
       }
     },
   },

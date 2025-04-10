@@ -87,8 +87,8 @@ const Property = () => {
   return (
     <>
       {property !== null && (
-        <div>
-          <h1 className="text-slate-200 text-2xl font-semibold m-9">
+        <div className="mt-[6.5rem]">
+          <h1 className="text-black text-2xl font-semibold m-9">
             Property Details
           </h1>
           <div
@@ -236,7 +236,7 @@ const Property = () => {
               </div>
             </div>
             <div className="max-w-[500px] max-sm:max-w-[95%]">
-              <div className="bg-orange-500 text-slate-100 rounded-t-md py-2 font-bold">
+              <div className="bg-secondary text-slate-100 rounded-t-md py-2 font-bold">
                 <p className="text-center">Managed By</p>
               </div>
               <div className=" space-y-6 bg-white shadow-lg p-6">
@@ -250,36 +250,36 @@ const Property = () => {
                       />
                     </div>
                     <div className="flex-1">
-                      <p className="text-indigo-600 text-sm mb-1 font-bold uppercase">
+                      <p className="text-secondary text-sm mb-1 font-bold uppercase">
                         Jeff Kebeck
                       </p>
                       <div className="flex items-center justify-between gap-3">
                         <div className="flex items-center gap-1 text-sm font-medium">
-                          <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                          <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                             <IoIosStar className="align-middle" />
                           </span>
-                          <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                          <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                             <IoIosStar className="align-middle" />
                           </span>
-                          <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                          <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                             <IoIosStar className="align-middle" />
                           </span>
-                          <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                          <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                             <IoIosStar className="align-middle" />
                           </span>
-                          <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                          <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                             <IoIosStar className="align-middle" />
                           </span>
                           <p className="pl-1 text-xs">16 reviews</p>
                         </div>
                         <p className="text-xs flex items-center">
-                          <span className="inline-block p-[2px] rounded-full bg-indigo-600 text-white text-xs">
+                          <span className="inline-block p-[2px] rounded-full bg-secondary text-white text-xs">
                             <IoShieldCheckmarkOutline className="align-middle" />
                           </span>
                           <span className="font-semibold">Top Agent</span>
                         </p>
                       </div>
-                      <div className="border-b-[1.5px] border-b-orange-600 my-4"></div>
+                      <div className="border-b-[1.5px] border-b-secondary my-4"></div>
                       <p className="text-xs">
                         <span className="font-semibold">15 years</span> of
                         experience in
@@ -301,25 +301,25 @@ const Property = () => {
                 <div>
                   <div className="flex items-center gap-2">
                     <p className="font-bold text-sm">Quaterz Ratings</p>
-                    <div className="border-b-[1.5px] border-b-orange-500 flex-1"></div>
+                    <div className="border-b-[1.5px] border-b-secondary flex-1"></div>
                   </div>
                   <div className="flex flex-wrap gap-3 items-center my-2 justify-center">
                     <div className="flex flex-col justify-center text-center bg-slate-100 gap-1 py-2 text-xs px-3 rounded-md">
                       <p>Onboarding</p>
                       <div className="flex items-center gap-1 justify-center">
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
                       </div>
@@ -327,19 +327,19 @@ const Property = () => {
                     <div className="flex flex-col justify-center bg-slate-100 text-xs gap-1 py-2 px-3 rounded-md">
                       <p>Responsiveness</p>
                       <div className="flex items-center gap-1 justify-center">
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
                       </div>
@@ -347,19 +347,19 @@ const Property = () => {
                     <div className="flex flex-col justify-center bg-slate-100 text-xs gap-1 py-2 px-3 rounded-md">
                       <p>Communication</p>
                       <div className="flex items-center gap-1 justify-center">
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
                       </div>
@@ -369,19 +369,19 @@ const Property = () => {
                     <div className="flex flex-col justify-center bg-slate-100 text-xs gap-1 py-2 px-3 rounded-md">
                       <p>Tenant Experience</p>
                       <div className="flex items-center gap-1 justify-center">
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
                       </div>
@@ -389,19 +389,19 @@ const Property = () => {
                     <div className="flex flex-col justify-center bg-slate-100 text-xs gap-1 py-2 px-3 rounded-md">
                       <p>Landlord Experience</p>
                       <div className="flex items-center gap-1 justify-center">
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
-                        <span className="inline-block p-[2px] bg-orange-500 text-white rounded-full text-xs">
+                        <span className="inline-block p-[2px] bg-secondary text-white rounded-full text-xs">
                           <IoIosStar className="align-middle" />
                         </span>
                       </div>
@@ -411,24 +411,24 @@ const Property = () => {
                 <div>
                   <div className="flex items-center gap-2">
                     <p className="font-bold text-sm">Agent Profile</p>
-                    <div className="border-b-[1.5px] border-b-orange-500 flex-1"></div>
+                    <div className="border-b-[1.5px] border-b-secondary flex-1"></div>
                   </div>
                   <div className="flex flex-wrap justify-center items-center gap-6 my-2">
                     <div className="space-x-2 pt-2">
-                      <span className="inline-block p-1 rounded-md bg-indigo-500 text-white">
+                      <span className="inline-block p-1 rounded-md bg-secondary text-white">
                         <CgFacebook className="align-middle" />
                       </span>
-                      <span className="inline-block p-1 rounded-md bg-indigo-500 text-white">
+                      <span className="inline-block p-1 rounded-md bg-secondary text-white">
                         <FaWhatsapp className="align-middle" />
                       </span>
-                      <span className="inline-block p-1 rounded-md bg-indigo-500 text-white ">
+                      <span className="inline-block p-1 rounded-md bg-secondary text-white ">
                         <TiSocialLinkedin className="align-middle" />
                       </span>
-                      <span className="inline-block p-1 rounded-md bg-indigo-500 text-white ">
+                      <span className="inline-block p-1 rounded-md bg-secondary text-white ">
                         <FaInstagram className="align-middle" />
                       </span>
                     </div>
-                    <button className="bg-orange-500 text-slate-100 font-semibold px-4 py-1 text-sm flex-1 rounded-md max-sm:text-xs min-w-[120px]">
+                    <button className="bg-secondary text-slate-100 font-semibold px-4 py-1 text-sm flex-1 rounded-md max-sm:text-xs min-w-[120px]">
                       Contact Agent
                     </button>
                   </div>

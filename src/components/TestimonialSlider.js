@@ -53,13 +53,13 @@ const TestimonialSlider = () => {
     <>
       <div className=" absolute right-12 top-[40%] flex gap-6 items-center max-lg:hidden">
         <button
-          className="text-xl text-slate-200 bg-orange-600 p-5 font-bold"
+          className="text-xl text-slate-200 bg-[#ff5a3c] p-5 font-bold"
           onClick={handlePrev}
         >
           <IoArrowBackOutline />
         </button>
         <button
-          className="text-xl bg-white text-slate-900 p-5 font-bold hover:bg-orange-600 hover:text-slate-200"
+          className="text-xl bg-white text-slate-900 p-5 font-bold hover:bg-[#ff5a3c] hover:text-slate-200"
           onClick={handleNext}
         >
           <IoArrowForwardOutline />

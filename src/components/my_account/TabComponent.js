@@ -14,7 +14,9 @@ import { MdOutlineStorage } from "react-icons/md";
 import { RiSecurePaymentFill } from "react-icons/ri";
 import { BiSolidLockAlt } from "react-icons/bi";
 import { FaHeart } from "react-icons/fa";
+import { VscSignOut } from "react-icons/vsc";
 import MyProperties from "./MyProperties";
+import LogOut from './LogOut';
 
 const TabComponent = () => {
   const dashboardIcon = <AiFillHome />;
@@ -24,6 +26,7 @@ const TabComponent = () => {
   const propertyIcon = <MdOutlineStorage />;
   const paymentIcon = <RiSecurePaymentFill />;
   const favoriteIcon = <FaHeart />;
+  const logoOutIcon = <VscSignOut />;
   return (
     <>
       <UserAccount>
@@ -31,11 +34,12 @@ const TabComponent = () => {
 
         {/* <Address label="Address" icon={addressIcon}/>  */}
         {/* <Dashboard label="Dashboard" icon={dashboardIcon} /> */}
-        <PasswordChange label="Change Password" icon={passwordIcon} />
+        <PasswordChange label="ChangePassword" icon={passwordIcon} />
         <Payment label="Payments" icon={paymentIcon} />
-        <AddProperty label="Add Property" icon={propertyIcon} />
-        <MyProperties label="My Properties" icon={propertyIcon} />
-        <FavoriteProperties label="Favorite Properties" icon={favoriteIcon} />
+        <AddProperty label="AddProperty" icon={propertyIcon} />
+        <MyProperties label="MyProperties" icon={propertyIcon} />
+        <FavoriteProperties label="FavoriteProperties" icon={favoriteIcon} />
+        <LogOut label="Logout" icon={logoOutIcon} />
       </UserAccount>
     </>
   );

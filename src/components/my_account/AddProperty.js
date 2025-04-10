@@ -114,7 +114,7 @@ const AddProperty = () => {
   return (
     <div>
       <form className=" flex justify-center items-center max-sm:text-xs">
-        <div className="space-y-8 w-full sm:w-[85%] xl:w-full ">
+        <div className="space-y-8 w-full">
           <div className="space-y-4">
             <p className="text-slate-800 font-medium">Property Description</p>
             <input
@@ -126,7 +126,7 @@ const AddProperty = () => {
               minLength={10}
               maxLength={32}
               onChange={handleChange}
-              className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 h-14 focus:outline-none focus:ring-orange-600 appearance-none"
+              className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 h-14 focus:outline-none focus:ring-secondary appearance-none"
             />
             <textarea
               id="description"
@@ -135,7 +135,7 @@ const AddProperty = () => {
               required
               onChange={handleChange}
               type="text"
-              className="w-full appearance-none bg-transparent border-2 border-slate-200  min-h-[120px] max-h-[120px] focus:outline-none focus:border-none focus:ring-orange-600 "
+              className="w-full appearance-none bg-transparent border-2 border-slate-200  min-h-[120px] max-h-[120px] focus:outline-none focus:border-none focus:ring-secondary"
             />
           </div>
           <div className=" space-y-4">
@@ -148,8 +148,8 @@ const AddProperty = () => {
                 onClick={handleChange}
                 className={` py-2  font-medium  flex-1 uppercase transition-colors duration-200 ease-linear ${
                   type === "sale"
-                    ? "bg-orange-600 text-slate-100"
-                    : "text-orange-600 border-2 border-slate-200"
+                    ? "bg-secondary text-white"
+                    : "text-secondary border-2 border-slate-200 "
                 }`}
               >
                 Sale
@@ -161,8 +161,8 @@ const AddProperty = () => {
                 onClick={handleChange}
                 className={` py-2  font-medium  flex-1 uppercase transition-colors duration-200 ease-in-out ${
                   type === "rent"
-                    ? "bg-orange-600 text-slate-200 hover:text-slate-300"
-                    : "text-orange-600 border-2 border-slate-200 hover:text-orange-700"
+                    ? "bg-secondary text-white"
+                    : "text-secondary border-2 border-slate-100"
                 }`}
               >
                 Rent
@@ -179,8 +179,8 @@ const AddProperty = () => {
                 onClick={handleChange}
                 className={` py-2  font-medium  flex-1 uppercase transition-colors duration-300 ease-linear ${
                   offer
-                    ? "bg-orange-600 text-slate-200 hover:text-slate-300"
-                    : "text-orange-600 border-2 border-slate-200 hover:text-orange-700"
+                    ? "bg-secondary text-white"
+                    : "text-secondary border-2 border-slate-200"
                 }`}
               >
                 Offer
@@ -192,8 +192,8 @@ const AddProperty = () => {
                 onClick={handleChange}
                 className={` py-2  font-medium  flex-1 uppercase transition-colors duration-300 ease-linear ${
                   !offer
-                    ? "bg-orange-600 text-slate-200 hover:text-slate-300"
-                    : "text-orange-600 border-2 border-slate-200 hover:text-orange-700"
+                    ? "bg-secondary text-white"
+                    : "text-secondary border-2 border-slate-200"
                 }`}
               >
                 No Offer
@@ -209,9 +209,9 @@ const AddProperty = () => {
                   min={1000}
                   max={9999999}
                   type="number"
-                  className="w-full bg-transparent transition-all duration-400 ease-out focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 py-2 focus:outline-none focus:ring-orange-600 appearance-none"
+                  className="w-full bg-transparent transition-all duration-400 ease-out focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 py-2 focus:outline-none focus:ring-secondary"
                 />
-                <p className="absolute left-[40%] top-[30%] text-sm max-sm:text-xs text-slate-400">
+                <p className="absolute left-[40%] top-[30%] text-sm max-sm:text-xs text-slate-600">
                   Regular ($)
                 </p>
               </div>
@@ -224,7 +224,7 @@ const AddProperty = () => {
                   onChange={handleChange}
                   min={1000}
                   max={9999999}
-                  className="w-full bg-transparent transition-all duration-400 ease-out focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 py-2 focus:outline-none focus:ring-orange-600 appearance-none"
+                  className="w-full bg-transparent transition-all duration-400 ease-out focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 py-2 focus:outline-none focus:ring-secondary"
                 />
                 <p className="absolute left-[35%] top-[30%] text-sm max-sm:text-xs text-slate-400">
                   Discounted ($)
@@ -245,7 +245,7 @@ const AddProperty = () => {
                     min={1}
                     max={18}
                     onChange={handleChange}
-                    className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 py-2 focus:outline-none focus:ring-orange-600 appearance-none"
+                    className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 py-2 focus:outline-none focus:ring-secondary appearance-none"
                   />
                   <p className="absolute left-[40%] top-[30%] text-sm max-sm:text-xs text-slate-400">
                     bedrooms
@@ -260,7 +260,7 @@ const AddProperty = () => {
                     type="number"
                     required
                     onChange={handleChange}
-                    className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 py-2 focus:outline-none focus:ring-orange-600 appearance-none"
+                    className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 py-2 focus:outline-none focus:ring-secondary appearance-none"
                   />
                   <p className="absolute left-[40%] top-[30%] text-sm max-sm:text-xs text-slate-400">
                     bathrooms
@@ -275,8 +275,8 @@ const AddProperty = () => {
                   onClick={handleChange}
                   className={` max-sm:text-xs py-2  font-medium  flex-1 uppercase transition-colors duration-300 ease-linear  ${
                     parking
-                      ? "bg-orange-600 text-slate-200 hover:text-slate-300"
-                      : "text-orange-600 border-2 border-slate-200 hover:text-orange-700"
+                      ? "bg-secondary text-white"
+                      : "text-secondary border-2 border-slate-200"
                   }`}
                 >
                   Parking
@@ -288,8 +288,8 @@ const AddProperty = () => {
                   onClick={handleChange}
                   className={` max-sm:text-xs py-2 font-medium  flex-1 uppercase transition-colors duration-300 ease-linear ${
                     !parking
-                      ? "bg-orange-600 text-slate-200 hover:text-slate-300"
-                      : "text-orange-600 border-2 border-slate-200 hover:text-orange-700"
+                      ? "bg-secondary text-white"
+                      : "text-secondary border-2 border-slate-200"
                   }`}
                 >
                   No Parking
@@ -300,8 +300,8 @@ const AddProperty = () => {
                   id="furnished"
                   className={`py-2 max-sm:text-xs  font-medium  flex-1 uppercase ${
                     furnished
-                      ? "bg-orange-600 text-slate-200 hover:text-slate-300"
-                      : "text-orange-600 border-2 border-slate-200 hover:text-orange-700"
+                      ? "bg-secondary text-white"
+                      : "text-secondary border-2 border-slate-200"
                   }`}
                   type="button"
                   value={true}
@@ -316,8 +316,8 @@ const AddProperty = () => {
                   onClick={handleChange}
                   className={`py-2 max-sm:text-xs   font-medium  flex-1 uppercase transition-colors duration-300 ease-linear ${
                     !furnished
-                      ? "bg-orange-600 text-slate-200 hover:text-slate-300"
-                      : "text-orange-600 border-2 border-slate-200 hover:text-orange-700"
+                      ? "bg-[#ff5a3] text-white"
+                      : "text-secondary border-2 border-slate-200"
                   }`}
                 >
                   Not furnished
@@ -337,7 +337,7 @@ const AddProperty = () => {
                 required
                 onChange={handleChange}
                 placeholder="Address"
-                className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 h-14 focus:outline-none focus:ring-orange-600 appearance-none"
+                className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 h-14 focus:outline-none focus:ring-secondary appearance-none"
               />
             </div>
             <div className="flex space-x-4">
@@ -348,7 +348,7 @@ const AddProperty = () => {
                   type="number"
                   required
                   onChange={handleChange}
-                  className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 py-2 focus:outline-none focus:ring-orange-600 appearance-none"
+                  className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 py-2 focus:outline-none focus:ring-secondary appearance-none"
                 />
                 <p className="absolute left-[40%] top-[30%] text-sm max-sm:text-xs text-slate-400">
                   Longitude
@@ -361,7 +361,7 @@ const AddProperty = () => {
                   type="number"
                   required
                   onChange={handleChange}
-                  className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 py-2 focus:outline-none focus:ring-orange-600 appearance-none"
+                  className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 py-2 focus:outline-none focus:ring-secondary appearance-none"
                 />
                 <p className="absolute left-[40%] top-[30%] text-sm max-sm:text-sm text-slate-400">
                   Latitude
@@ -378,9 +378,9 @@ const AddProperty = () => {
                 required
                 onChange={handleChange}
                 accept=".jpeg, .jpg, .png"
-                className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 h-14 focus:outline-none focus:ring-orange-600 appearance-none pt-3 pl-3"
+                className="w-full bg-transparent focus:border-none border-2 focus:bg-transparent cursor-pointer border-slate-200 h-14 focus:outline-none focus:ring-secondary appearance-none pt-3 pl-3"
               />
-              <p className="absolute right-[15%] top-[35%] text-sm text-slate-400 max-sm:text-xs">
+              <p className="absolute right-[15%] top-[35%] text-sm text-slate-400 max-sm:text-xs ">
                 Max of six
               </p>
             </div>
@@ -389,7 +389,7 @@ const AddProperty = () => {
             <button
               type="submit"
               onClick={handleSubmit}
-              className="px-6 py-4 bg-orange-600 text-slate-200 font-medium  w-full uppercase cursor-pointer hover:text-slate-300"
+              className="px-6 py-4 bg-secondary text-white font-medium  w-full uppercase cursor-pointer hover:bg-orange-700"
             >
               Create Property
             </button>

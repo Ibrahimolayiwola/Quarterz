@@ -17,10 +17,9 @@ import imgIcon2 from '../assets/icon-img/img-icon2.png'
 import imgIcon3 from '../assets/icon-img/img-icon3.png'
 const AboutUs = () => {
   return (
-    <>
-      <div className="my-24">
+      <div className="my-24 max-w-7xl mx-auto">
         <h1 className="text-center">
-          <span className=" px-3 py-1.5 text-lg font-semibold text-orange-600">
+          <span className=" px-3 py-1.5 text-lg font-semibold text-[#ff5a3c]">
             About Us
           </span>
         </h1>
@@ -33,14 +32,14 @@ const AboutUs = () => {
               Dream Living Spaces <br />
               Setting New Build
             </h1>
-            <p className="text-slate-500 pb-4 pr-6 font-size-p">
+            <p className="text-slate-500 pb-4 pr-6 text-[1rem] leading-[1.5rem] sm:text-[1.3rem] sm:leading-[2rem]">
               Over 3,000 people work for us in more than 20 countries all over
               this breadth of global coverage, combined with specialist
               services.{" "}
             </p>
             <div className="mt-9">
               <div className="mb-4 flex gap-4 justify-center p-6 border border-gray-100 hover:shadow-xl transition-all ease-out duration-200">
-                <span className="text-6xl text-orange-600 font-bold">
+                <span className="text-6xl text-[#ff5a3c] font-bold">
                   <HiHomeModern />
                 </span>
                 <div className="">
@@ -54,7 +53,7 @@ const AboutUs = () => {
                 </div>
               </div>
               <div className="mb-4 flex gap-4 justify-center p-6 border border-gray-100 hover:shadow-xl transition-all ease-out duration-200">
-                <span className="text-6xl text-orange-600 font-bold">
+                <span className="text-6xl text-[#ff5a3c] font-bold">
                   <ImUserTie />
                 </span>
                 <div>
@@ -68,7 +67,7 @@ const AboutUs = () => {
                 </div>
               </div>
               <div className="flex gap-4 justify-center p-6  border border-gray-100 hover:shadow-xl transition-all ease-out duration-200">
-                <span className="text-6xl text-orange-600 font-bold">
+                <span className="text-6xl text-[#ff5a3c] font-bold">
                   <MdStorage />
                 </span>
                 <div>
@@ -87,7 +86,7 @@ const AboutUs = () => {
         <div className="flex max-lg:flex-col bg-slate-100 items-center justify-center gap-3">
           <div className="flex-1 p-9">
             <div className="mb-6">
-              <h1 className="text-orange-600 text-lg mb-3 font-medium">
+              <h1 className="text-[#ff5a3c] text-lg mb-3 font-medium">
                 Building Facilities
               </h1>
               <h2 className="text-slate-900 mb-3 font-bold font-size-h leading-normal">
@@ -102,7 +101,7 @@ const AboutUs = () => {
             <div className="mt-16">
               <ul className="grid grid-cols-2 gap-6">
                 <li className="flex gap-4 justify-start items-center">
-                  <span className="p-1 text-2xl w-7 h-7 flex items-center rounded-full  text-orange-600 font-bold bg-red-100">
+                  <span className="p-1 text-2xl w-7 h-7 flex items-center rounded-full  text-[#ff5a3c] font-bold bg-red-100">
                     <IoCheckmarkSharp className="inline" />
                   </span>
                   <p className=" text-slate-600 font-size-p">
@@ -110,7 +109,7 @@ const AboutUs = () => {
                   </p>
                 </li>
                 <li className="flex gap-4 justify-start items-center">
-                  <span className="p-1 text-2xl w-7 h-7 flex items-center rounded-full  text-red-500 font-bold bg-red-100">
+                  <span className="p-1 text-2xl w-7 h-7 flex items-center rounded-full  text-[#ff5a3c] font-bold bg-red-100">
                     <IoCheckmarkSharp className="inline" />
                   </span>
                   <p className=" text-slate-600 font-size-p">
@@ -118,7 +117,7 @@ const AboutUs = () => {
                   </p>
                 </li>
                 <li className="flex gap-4 justify-start items-center">
-                  <span className="p-1 text-2xl w-7 h-7 flex items-center rounded-full  text-red-500 font-bold bg-red-100 ">
+                  <span className="p-1 text-2xl w-7 h-7 flex items-center rounded-full  text-[#ff5a3c] font-bold bg-red-100 ">
                     <IoCheckmarkSharp className="inline" />
                   </span>
                   <p className=" text-slate-600 font-size-p">
@@ -126,7 +125,7 @@ const AboutUs = () => {
                   </p>
                 </li>
                 <li className="flex gap-4 justify-start items-center">
-                  <span className="p-1 text-2xl w-7 h-7 flex items-center rounded-full  text-red-500 font-bold bg-red-100">
+                  <span className="p-1 text-2xl w-7 h-7 flex items-center rounded-full  text-[#ff5a3c] font-bold bg-red-100">
                     <IoCheckmarkSharp className="inline" />
                   </span>
                   <p className=" text-slate-600 font-size-p">
@@ -134,7 +133,7 @@ const AboutUs = () => {
                   </p>
                 </li>
                 <li className="flex gap-4 justify-start items-center">
-                  <span className="p-1 text-2xl w-7 h-7 flex items-center rounded-full  text-red-500 font-bold bg-red-100">
+                  <span className="p-1 text-2xl w-7 h-7 flex items-center rounded-full  text-[#ff5a3c] font-bold bg-red-100">
                     <IoCheckmarkSharp className="inline" />
                   </span>
                   <p className=" text-slate-600 font-size-p">
@@ -142,7 +141,7 @@ const AboutUs = () => {
                   </p>
                 </li>
                 <li className="flex gap-4 justify-start items-center">
-                  <span className="p-1 text-2xl w-7 h-7 flex items-center rounded-full  text-red-500 font-bold bg-red-100">
+                  <span className="p-1 text-2xl w-7 h-7 flex items-center rounded-full  text-[#ff5a3c] font-bold bg-red-100">
                     <IoCheckmarkSharp className="inline" />
                   </span>
                   <p className=" text-slate-600 font-size-p">
@@ -158,7 +157,7 @@ const AboutUs = () => {
         </div>
         <div>
           <div className="my-24">
-            <h1 className="text-lg text-red-500 font-semibold text-center mb- 6">
+            <h1 className="text-lg text-[#ff5a3c] font-semibold text-center mb- 6">
               Our Services
             </h1>
             <h2 className="font-size-h text-slate-900 font-bold text-bold text-center my-6">
@@ -166,7 +165,7 @@ const AboutUs = () => {
             </h2>
             
             <div className=" flex gap-6 p-6 flex-col sm:flex-row sm:flex-wrap justify-center items-center max-sm-md:px-16">
-              <div className="flex flex-col justify-center items-center gap-6 px-6 py-9  text-center text-slate-300  hover:text-red-500 hover:border-b-2 shadow-2xl  hover:border-b-red-500 transition-colors duration-500 ease-linear sm-md:w-[300px] xl:w-[340px] md:w-[340px] md-lg:w-[300px] xl-2xl:w-[380px]">
+              <div className="flex flex-col justify-center items-center gap-6 px-6 py-9  text-center text-slate-300  hover:text-[#ff5a3c] hover:border-b-2 shadow-2xl  hover:border-b-[#ff5a3c] transition-colors duration-500 ease-linear sm-md:w-[300px] xl:w-[340px] md:w-[340px] md-lg:w-[300px] xl-2xl:w-[380px]">
                 <div className=" text-red-400 ">
                   <img src={imgIcon1} alt="Icon1" />
                 </div>
@@ -185,7 +184,7 @@ const AboutUs = () => {
                 </div>
                 
               </div>
-              <div className="flex flex-col justify-center items-center gap-6 px-6 py-9 text-center text-slate-300 shadow-2xl hover:border-b-2 hover:text-red-500 hover:border-b-red-500 transition-colors duration-500 ease-linear  sm-md:w-[300px] xl:w-[340px] md:w-[340px] md-lg:w-[300px] xl-2xl:w-[380px]">
+              <div className="flex flex-col justify-center items-center gap-6 px-6 py-9 text-center text-slate-300 shadow-2xl hover:border-b-2 hover:text-[#ff5a3c] hover:border-b-[#ff5a3c] transition-colors duration-500 ease-linear  sm-md:w-[300px] xl:w-[340px] md:w-[340px] md-lg:w-[300px] xl-2xl:w-[380px]">
                 <div className=" text-red-400 ">
                   <img src={imgIcon2} alt="icon2" />
                 </div>
@@ -203,7 +202,7 @@ const AboutUs = () => {
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col justify-center items-center gap-6 px-6 py-9 shadow-2xl text-center text-slate-300 hover:border-b-2 hover:text-red-500 hover:border-b-red-500 transition duration-500 sm-md:w-[300px] xl:w-[340px] md:w-[340px] md-lg:w-[300px] xl-2xl:w-[380px]">
+              <div className="flex flex-col justify-center items-center gap-6 px-6 py-9 shadow-2xl text-center text-slate-300 hover:border-b-2 hover:text-[#ff5a3c] hover:border-b-[#ff5a3c] transition duration-500 sm-md:w-[300px] xl:w-[340px] md:w-[340px] md-lg:w-[300px] xl-2xl:w-[380px]">
                 <div className=" text-red-400">
                   <img src={imgIcon3} alt="icon3" />
                 </div>
@@ -226,7 +225,6 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-    </>
   );
 };
 

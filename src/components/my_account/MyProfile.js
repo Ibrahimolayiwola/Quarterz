@@ -79,8 +79,8 @@ const MyProfile = (e) => {
 
   return (
     <div className="">
-      <div className="flex items-center space-x-6 p-12 bg-white border-2 border-slate-100 mb-10">
-        <div className=" w-[140px] h-[150px] flex items-center justify-center flex-col">
+      <div className="flex flex-col sm:flex-row justify-center items-center  gap-6 p-12 bg-white border-2 border-slate-100 mb-10 ">
+        <div className="w-[140px] h-[150px] flex items-center justify-center flex-col">
           <div className="flex flex-col items-center justify-center relative w-[140px] h-[140px] rounded-full overflow-hidden bg-slate-200">
             <label htmlFor="userImage">
               <CiUser
@@ -97,7 +97,7 @@ const MyProfile = (e) => {
               />
             </label>
             <button
-              className={`text-[8px] p-[2px] bg-red-700 text-slate-100 rounded-md uppercase absolute  bottom-1 ${
+              className={`text-[8px] p-[2px] bg-secondary text-slate-100 rounded-md uppercase absolute  bottom-1 ${
                 uploaded ? "hidden" : ""
               }`}
               onClick={uploadImage}
@@ -114,9 +114,9 @@ const MyProfile = (e) => {
           </div>
         </div>
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-orange-600">
+          <h2 className="text-2xl font-bold text-secondary">
             {name ? name : `${firstName} ${lastName}`}
-          </h1>
+          </h2>
           <p className="flex text-slate-500  items-center gap-2">
             <CiLocationOn className="text-green-700" />{" "}
             {address ? address : "Allen avenue, Lagos"}
@@ -124,8 +124,8 @@ const MyProfile = (e) => {
           <p className="flex text-slate-500 items-center gap-2">
             <MdOutlinePhoneInTalk /> {phone ? phone : "+1345726246"}
           </p>
-          <p className="flex text-slate-500 items-center gap-2">
-            <GoMail className="text-orange-600" /> {email}
+          <p className="flex text-slate-500  gap-2  break-all">
+            <GoMail className="text-secondary" /> {email}
           </p>
         </div>
       </div>

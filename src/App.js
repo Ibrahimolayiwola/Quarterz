@@ -19,6 +19,7 @@ import TabComponent from "./components/my_account/TabComponent";
 import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
+
   return (
     <>
       <Router>
@@ -43,8 +44,8 @@ function App() {
             <Route path="/edit-list/:listingId" element={<EditList />} />
           </Route>
           <Route path="/contact" element={<Contact />} />
-          <Route path="/my-account" element={<PrivateRoute />}>
-            <Route path="/my-account" element={<TabComponent />} />
+          <Route path="/user-account" element={<PrivateRoute />}>
+            <Route path="/user-account" element={<TabComponent />} />
           </Route>
           <Route path="/sign-up/verify-email" element={<PrivateRoute />}>
             <Route path="/sign-up/verify-email" element={<VerifyEmail />} />

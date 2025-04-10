@@ -21,67 +21,64 @@ const Contact = () => {
 
   return (
     <>
-      <div className="p-[5rem] h-[22rem] bg-slate-100 shadow-xl">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="font-size-h text-slate-900 font-bold">Contact Us</h1>
+      <div className="p-[5rem] h-[25rem] flex justify-center items-center bg-slate-100 shadow-xl">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="font-size-h text-slate-900 font-bold text-center">Contact</h1>
         </div>
       </div>
-      <div className="flex flex-col md-lg:flex-row gap-6 p-8 max-w-[75rem] md-lg:px-12 xl:px-8 mx-auto my-20">
-        <div className="flex-1 flex flex-col justify-center items-center gap-4 border-2 shadow-sm border-slate-100 py-12">
-          <div className="">
-            <img src={contactIcon1} alt="icon1" />
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md-lg:flex-row gap-6 p-8  md-lg:px-12 xl:px-8 mx-auto my-20">
+          <div className="flex-1 flex flex-col justify-center items-center gap-4 border-2 shadow-sm border-slate-100 py-12">
+            <div className="">
+              <img src={contactIcon1} alt="icon1" />
+            </div>
+            <h2 className="text-[1.5rem] font-bold text-slate-800">
+              Email Address
+            </h2>
+            <div>
+              <p className="text-slate-600 font-size-p text-center mb-1">
+                Highbee@gmail.com
+              </p>
+              <p className="text-slate-600 font-size-p text-center">
+                Azeez@gmail.com
+              </p>
+            </div>
           </div>
-          <h2 className="text-[1.5rem] font-bold text-slate-800">
-            Email Address
-          </h2>
-          <div>
-            <p className="text-slate-600 font-size-p text-center mb-1">
-              Highbee@gmail.com
-            </p>
-            <p className="text-slate-600 font-size-p text-center">
-              Azeez@gmail.com
-            </p>
+          <div className="flex-1 flex flex-col justify-center items-center gap-4 border-2 border-gray-100 py-12 shadow-sm">
+            <div className="">
+              <img src={contactIcon2} alt="icon2" />
+            </div>
+            <h2 className="text-[1.5rem] font-bold text-slate-800">
+              Phone number
+            </h2>
+            <div>
+              <p className="text-slate-600 font-size-p text-center mb-1">
+                +2348187654325
+              </p>
+              <p className="text-slate-600 font-size-p text-center">
+                +2346754329876
+              </p>
+            </div>
+          </div>
+          <div className="flex-1 flex flex-col justify-center items-center gap-4 border-2 border-slate-100 py-12 shadow-sm">
+            <div className="">
+              <img src={contactIcon3} alt="icon3" />
+            </div>
+            <h2 className="text-[1.5rem] font-bold text-slate-800">
+              Office Address
+            </h2>
+            <div>
+              <p className="text-slate-600 font-size-p text-center mb-1">
+                18B Allen avenue
+              </p>
+              <p className="text-slate-600 font-size-p text-center">
+                Festac Town
+              </p>
+            </div>
           </div>
         </div>
-        <div className="flex-1 flex flex-col justify-center items-center gap-4 border-2 border-gray-100 py-12 shadow-sm">
-          <div className="">
-            <img src={contactIcon2} alt="icon2" />
-          </div>
-          <h2 className="text-[1.5rem] font-bold text-slate-800">
-            Phone number
-          </h2>
-          <div>
-            <p className="text-slate-600 font-size-p text-center mb-1">
-              +2348187654325
-            </p>
-            <p className="text-slate-600 font-size-p text-center">
-              +2346754329876
-            </p>
-          </div>
-        </div>
-        <div className="flex-1 flex flex-col justify-center items-center gap-4 border-2 border-slate-100 py-12 shadow-sm">
-          <div className="">
-            <img src={contactIcon3} alt="icon3" />
-          </div>
-          <h2 className="text-[1.5rem] font-bold text-slate-800">
-            Office Address
-          </h2>
-          <div>
-            <p className="text-slate-600 font-size-p text-center mb-1">
-              18B Allen avenue
-            </p>
-            <p className="text-slate-600 font-size-p text-center">
-              Festac Town
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="h-[650px] max-w-7xl mx-auto relative -mb-44 flex justify-center max-md:mb-1 px-16">
-        <Demo className="w-[90%]" />
-      </div>
-      <div className="flex ">
-        <div className=" h-[100vh] flex-1 z-10  overflow-x-hidden">
-          <Leaflet listing={listing} />
+        <div className="h-[650px] mx-auto relative -mb-44 flex justify-center max-md:mb-1 px-16">
+          <Demo className="w-[90%]" />
         </div>
       </div>
     </>

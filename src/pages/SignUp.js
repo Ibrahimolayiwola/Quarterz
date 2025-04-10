@@ -50,7 +50,8 @@ const SignUp = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const errors = validate();
-    if (Object.keys(errors).length !== 0) {
+    const invalid = Object.keys(errors).length !== 0
+    if (invalid) {
       return;
     }
 
@@ -90,8 +91,8 @@ const SignUp = () => {
 
   return (
     <section>
-      <div className="px-[3rem] py-[8rem] h-[22rem] bg-slate-100">
-        <div className="max-w-6xl mx-auto">
+      <div className=" h-[22rem] bg-slate-100">
+        <div className="max-w-6xl mx-auto h-full flex justify-center items-center">
           <h1 className="font-size-h text-slate-900 font-bold">Account</h1>
         </div>
       </div>
